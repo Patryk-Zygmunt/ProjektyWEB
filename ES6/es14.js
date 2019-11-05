@@ -28,16 +28,12 @@ zad4 = ()=>{
     const obj = {
         name : "Marcin",
         surname : "Kowalski",
-        age
-            : 20
+        age: 20
     }
 
-        const {name,surname,age:userAge} = obj
-
-
-    const user = {     name: 'Grzegorz',     type: 'node',     info: 'something',     id: 21,     relatives: {         wife: {             name: 'Magdalena',             id: 22         }     } };
-
-    console.log(zad4(user))
+    const {name,surname,age:userAge} = obj
+    const user = {     name: 'Grzegorz', type: 'node',info: 'something',id: 21, relatives: {   wife: {  name: 'Magdalena', id: 22 }  } };
+    console.log(zad4a(user))
 }
 
 
@@ -47,6 +43,29 @@ function* zad6(){
 
 var g = zad6()
 
+console.log(g.next().value);
 console.log(g.next());
 console.log(g.next());
-console.log(g.next());
+
+
+
+zad7 = ()=>{
+    const user = [
+        {imie: "Ola", sex: 'F', value: 5000},
+    { imie: "Kasia", sex: 'F',value: 650},
+    { imie: "Jurek", sex: 'M',value: 10},
+    { imie: "Ola", sex: 'F', value: 1200},
+    { imie: "Robert", sex: 'M', value: 77},
+    { imie: "Wacek", sex: 'M', value: 77},
+    { imie: "Ula", sex: 'F', value: 77},
+    { imie: "Ola", sex: 'F', value: 77},
+]
+
+   return  { count: user.filter(u=>u.sex==='F').length,
+        salary: user.filter(u=>u.sex==='F').reduce((s,c)=>s+c.value,0)
+    }
+
+
+}
+
+console.log(zad7())

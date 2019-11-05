@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../Portfolio/css/bootstrap.min.css"/>
+
+</head>
+<body>
+<h2 id="val"></h2>
+
+<div id="blue" style="background-color: #005cbf;width:200px;height: 200px" onclick="color('nacisnąłeś niebieski o wartości 1',1)"></div>
+<div id ="red" style="background-color: crimson;width:100px;height: 100px;margin: 50px 50px 50px 50px;" onclick="color('nacisnąłeś czerwony o wartości 2',2)"></div>
+<div  id="yellow" style="background-color: #ffe8a1;width:50px;height: 50px;margin: 25px 25px 25px 25px;" onclick="color('nacisnąłeś żółty o wartości 5',5)"></div>
+
+
+<button type="button" class="btn btn-success" onclick="add()">Add</button>
+<button type="button" class="btn btn-danger" onclick="remove()">Remove</button>
+<div class="form-group">
+    <select class="form-control" id="valChanger" onchange="changer()">
+        <option>blue</option>
+        <option>red</option>
+        <option>yellow</option>
+    </select>
+</div>
+
+<script>
+
+    var value = 0
+    col="blue"
+
+  function color(text, val){
+      if(!show(val)) return;
+      alert(text)
+      value+=val
+      document.getElementById('val').innerText = value
+  }
+
+  show = (val)=>{
+        if(value>30 && val ===2) return false
+        return !(value > 50 && val === 3);
+  }
+
+  el = () => value+=3
+
+  function add(){
+        console.log(col)
+       document.getElementById(col).addEventListener("click",el)
+
+  }
+
+    function remove(){
+        document.getElementById(col).removeEventListener(el)
+
+    }
+
+function changer(){
+    var e = document.getElementById("valChanger");
+     col = e.value;
+}
+
+
+
+
+
+</script>
+
+
+<script src="../Portfolio/js/bootstrap.min.js"></script>
+</body>
+</html>
