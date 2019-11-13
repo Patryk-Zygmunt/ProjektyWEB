@@ -1,8 +1,9 @@
 <div class="container">
-  <ul class="list-group" *ngFor="let t of toursStyle">
+  <button type="button" [ngClass] = "'btn ' + ( reservation > 10 ? 'btn-success' : 'btn-danger')" style="width:100%">Ilość rezerwacji: {{reservation}}</button>
 
+  <ul class="list-group" *ngFor="let t of toursStyle">
 <app-tour [tour]="t.tour" [style]="t.style"  ></app-tour>
   </ul>
-  <button type="button" class="btn btn-success" >Ilość rezerwacji {{reservation}}</button>
-
 </div>
+
+<app-information></app-information>

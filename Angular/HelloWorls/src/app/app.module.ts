@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TableComponent } from './table/table.component';
 import { TourComponent } from './tour/tour.component';
 import { TourListComponent } from './tour-list/tour-list.component';
+import { InformationComponent } from './information/information.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableComponent,
     TourComponent,
-    TourListComponent
+    TourListComponent,
+    InformationComponent
   ],
   imports: [
     BrowserModule,

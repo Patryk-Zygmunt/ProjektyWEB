@@ -10,6 +10,8 @@ export class TourService {
       reservationAmount = this.reservationAmountSource.asObservable();
 
 
+  constructor() { }
+
       public changeReservation(val:number){
         this.reservationAmountSource.next(this.reservationAmountSource.getValue() + val)
       }
@@ -17,12 +19,12 @@ export class TourService {
       public getRandomTour(name){
       let t:Tour  =   {
           name:name,
-            country:this.countries[Math.floor(Math.random() * (10 + 1))].country,
+            country:this.countries[Math.floor(Math.random() * (25 + 1))].country,
           description:"Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus\n" +
         "        odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.\n" +
         "        Donec lacinia congue felis in faucibus.",
-          imageUrl: "https://i.content4travel.com/cms/img/u/desktop/se/xczjarm_0.jpg?version=180501-12?version=1",
-          price:Math.floor(Math.random() * (6000 - 1000 + 1) + 1000) ,
+          imageUrl: this.images[Math.floor(Math.random() * 4)],
+          price:Math.floor(Math.random() * (6000 - 1000 + 1) + 1000),
           maxPlaces:Math.floor(Math.random() * (60 - 5 + 1) + 5),
           start:new Date("2020-02-11"),
           end:new Date("2020-02-11"),
@@ -30,12 +32,20 @@ export class TourService {
         t.places = t.maxPlaces;
         t.start.setDate(t.start.getDate() - Math.floor(Math.random() * (80 - 5 + 1) + 5))
         t.end.setDate(t.start.getDate() +  Math.floor(Math.random() * (20 - 5 + 1) + 5))
-
 return t;
       }
 
-  constructor() { }
-  countries = [
+
+readonly  images = [
+  "https://i.content4travel.com/cms/img/u/desktop/se/xczjarm_0.jpg?version=180501-12?version=1",
+  "https://i.content4travel.com/cms/img/u/desktop/prodsliderphoto/hrgpyra_0.jpg?version=190528-10?version=1",
+  "https://i.content4travel.com/cms/img/u/desktop/prodsliderphoto/xsomale_0.jpg?version=89?version=1",
+  "https://i.content4travel.com/cms/img/u/desktop/prodsliderphoto/xczprah_0.jpg?version=180831-12?version=1",
+  "https://i.content4travel.com/cms/img/u/desktop/seres/xitklas_0.jpg"
+]
+
+
+  readonly countries = [
     {
       "country": "Afghanistan"
     },
