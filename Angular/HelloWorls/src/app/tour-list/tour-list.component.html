@@ -1,8 +1,31 @@
 <div class="container">
   <button type="button" [ngClass] = "'btn ' + ( reservation > 10 ? 'btn-success' : 'btn-danger')" style="width:100%">Ilość rezerwacji: {{reservation}}</button>
 
-  <ul class="list-group" *ngFor="let t of toursStyle">
-<app-tour [tour]="t.tour" [style]="t.style"  ></app-tour>
+  <ul class="list-group" *ngFor="let t of toursStyle; let i = index">
+    <li class="media list-group-item">
+      <div class="row">
+        <div class="col-3 border-right">
+          <img src="{{t.tour.imageUrl}}"
+               class="mr-3 rounded-circle" width="200px" height="200px">
+        </div>
+        <div class="col-9">
+          <h4>{{t.tour.country | uppercase}} {{t.tour.name | uppercase}}
+            <div class="float-right">
+              <small>    Data: <b class="text-primary"> {{t.tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{t.tour.end |date:'shortDate'}}</b> </small>
+            </div>  </h4>
+          <p>{{t.tour.description}} </p>
+          <b>Cena: <h3 [ngClass] = "t.style">{{t.tour.price | currency:'PLN'}}</h3> </b>
+          <div class="float-right">
+            <button type="button" [ngClass] = "placesClass" >Ilość miejsc {{t.tour.places}}/{{t.tour.maxPlaces}}</button>
+            <button type="button" [disabled]="t.tour.places<=0" [ngClass] = "reservationClass" (click)="change(-1,i)">Rezerwuj</button>
+            <button type="button" [disabled]="t.tour.places==t.tour.maxPlaces" [ngClass] = "resignationClass" (click)="change(1,i)">Zrezygnuj</button>
+          </div>
+
+        </div>
+      </div>
+
+    </li>
+
   </ul>
 </div>
 
