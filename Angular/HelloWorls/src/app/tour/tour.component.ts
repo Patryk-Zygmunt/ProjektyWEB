@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TourService} from "../services/tour.service";
+import {NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-tour',
@@ -10,6 +11,8 @@ export class TourComponent implements OnInit {
 
 
   private _tour: Tour = {} as Tour;
+  private _userRate:number=0;
+  hoveredRate:number=0;
 
   @Input('style')
   priceStyle="";
@@ -19,7 +22,10 @@ export class TourComponent implements OnInit {
   reservationClass = ['btn','btn-success']
   resignationClass = ['btn','btn-danger']
 
-  constructor(private tourService:TourService) { }
+  constructor(private tourService:TourService, config: NgbRatingConfig) {
+    config.readonly = false;
+    config.max = 5;
+  }
 
   ngOnInit() {
   }
@@ -27,14 +33,31 @@ export class TourComponent implements OnInit {
   @Input('tour')
   public set tour(t: Tour){
     this._tour  = t
+//    console.log(t)
     this.placesAmountChanged(t.places,t.maxPlaces)
   }
+  @Output()
+  toDelete = new EventEmitter<string>();
 
   public set places(p: number){
     this.tourService.changeReservation( this._tour.places -p)
     this._tour.places  = p
     this._places  = p
     this.placesAmountChanged(p,this._tour.maxPlaces)
+  }
+
+  public set userRate(rate:number){
+    if(!rate) return;
+    this._userRate = rate;
+    this._tour.rateAmount+=1;
+    this._tour.rate = ((this._tour.rateAmount-1) * this._tour.rate + rate) / this._tour.rateAmount
+  }
+
+
+  dateChoosen( d:{start:Date,end:Date}){
+        this._tour.start = d.start
+        this._tour.end = d.end
+
   }
 
   public placesAmountChanged(p: number, maxPlaces:number) {

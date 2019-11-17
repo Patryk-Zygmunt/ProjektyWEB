@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TourService} from "../services/tour.service";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-tour-list',
@@ -8,31 +9,39 @@ import {TourService} from "../services/tour.service";
 })
 export class TourListComponent implements OnInit {
 
-  reservation: any;
-  toursStyle :{tour:Tour,style:string}[] = [];
+  reservation: number;
+  _toursWithStyle :{tour:Tour,priceStyle:string}[] = [];
 
-  constructor(private tourService: TourService) { }
+  constructor(private tourService: TourService,private modalService: NgbModal) { }
 
   ngOnInit() {
     this.tourService.reservationAmount
       .subscribe(v=>this.reservation = v);
-    this.toursStyle   = this.tours.map(t=>  ({tour:t, style:'text-info'}));
-    let sorted   = this.toursStyle.sort((a,b)=>a.tour.price - b.tour.price);
-   this.toursStyle.find(t=>sorted[0].tour.name === t.tour.name).style = 'text-danger';
-   this.toursStyle.find(t=>sorted[sorted.length-1].tour.name === t.tour.name).style = 'text-success'
+    this.toursWithStyle   = this.tourService.getTours()
   }
 
 
- private tours :Tour[] = [
-   this.tourService.getRandomTour("Super wycieczka"),
-   this.tourService.getRandomTour("Super wycieczka1"),
-   this.tourService.getRandomTour("Super wycieczka2"),
-   this.tourService.getRandomTour("Super wycieczk3"),
-   this.tourService.getRandomTour("Super wycieczk4"),
-   this.tourService.getRandomTour("Super wycieczk5"),
-   this.tourService.getRandomTour("Super wycieczk6"),
-   this.tourService.getRandomTour("Super wycieczk7"),
-   this.tourService.getRandomTour("Super wycieczk8"),
-  ]
+  private findMaxAndMinPrice(){
+    if(this._toursWithStyle.length<=2) return;
+    let sorted   = this._toursWithStyle.map(e => ({ ... e })).sort((a, b)=>a.tour.price - b.tour.price); //map kopiuje tablice
+    this._toursWithStyle.find(t=>sorted[0].tour.name === t.tour.name).priceStyle = 'text-danger';
+    this._toursWithStyle.find(t=>sorted[sorted.length-1].tour.name === t.tour.name).priceStyle = 'text-success'
+  }
+
+  deleteTour(name:string){
+    this.tourService.deleteTour(name);
+    this.toursWithStyle   = this.tourService.getTours();
+  }
+
+  set toursWithStyle( tours: Tour[]){
+    this._toursWithStyle = tours.map(t=>({tour:t, priceStyle:'text-info'}));
+    this.findMaxAndMinPrice();
+  }
+
+  open(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+    }, (reason) => {
+    });
+  }
 
 }

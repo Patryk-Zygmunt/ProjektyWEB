@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subject} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+//import * as data from 'assert/data.json';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +10,40 @@ export class TourService {
 
   private reservationAmountSource = new BehaviorSubject<number>(0);
       reservationAmount = this.reservationAmountSource.asObservable();
+  //private tours :Tour[] = JSON.parse(data);
 
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    //this.getToursFromFile().subscribe(v=>this.tours = v);
+
+  }
+
+   getToursFromFile() {
+   // return  this.http.get<Tour[]>('assets/data.json')
+  }
+
+
+
 
       public changeReservation(val:number){
         this.reservationAmountSource.next(this.reservationAmountSource.getValue() + val)
       }
+
+
+      public getTours():Tour[]{
+      return this.tours;
+        }
+
+    public getTour(n: number):Tour{
+      return this.tours[n];
+   }
+   public addTour(t: Tour){
+      this.tours.push(t)
+   }
+
+  deleteTour(name:string){
+    this.tours = this.tours.filter(t=>t.name!=name)
+  }
 
       public getRandomTour(name){
       let t:Tour  =   {
@@ -28,6 +57,9 @@ export class TourService {
           maxPlaces:Math.floor(Math.random() * (60 - 5 + 1) + 5),
           start:new Date("2020-02-11"),
           end:new Date("2020-02-11"),
+        places:undefined,
+        rate:0,
+        rateAmount:0,
       } as Tour;
         t.places = t.maxPlaces;
         t.start.setDate(t.start.getDate() - Math.floor(Math.random() * (80 - 5 + 1) + 5))
@@ -156,5 +188,6 @@ readonly  images = [
   ]
 
 
+  private tours :Tour[] = Array.apply(null, new Array(10)).map((_,idx)=> this.getRandomTour("Wycieczka " + idx));
 
 }

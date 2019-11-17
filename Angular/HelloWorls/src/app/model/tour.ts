@@ -7,6 +7,8 @@ interface Tour {
   places:number,
   maxPlaces:number,
   start:Date,
+  rate:number,
+  rateAmount:number,
   end:Date,
 }
 
