@@ -12,6 +12,7 @@ import { NewTourComponent } from './new-tour/new-tour.component';
 import { CartComponent } from './cart/cart.component';
 import {HttpClientModule} from "@angular/common/http";
 import { TourDateComponent } from './tour-date/tour-date.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,8 @@ import { TourDateComponent } from './tour-date/tour-date.component';
     BrowserModule,
     NgbModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [],
