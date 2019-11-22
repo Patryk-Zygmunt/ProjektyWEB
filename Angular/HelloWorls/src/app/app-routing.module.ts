@@ -4,12 +4,13 @@ import {TableComponent} from "./table/table.component";
 import {TourComponent} from "./tour/tour.component";
 import {TourListComponent} from "./tour-list/tour-list.component";
 import {NewTourComponent} from "./new-tour/new-tour.component";
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
   { path: 'table', component: TableComponent},
   { path: '', component: TourListComponent },
-  { path: 'add', component: NewTourComponent },
+  { path: 'cart', component: CartComponent }
 
 
 ];

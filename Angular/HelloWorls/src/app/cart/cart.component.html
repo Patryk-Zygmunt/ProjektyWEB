@@ -1,1 +1,11 @@
-<p>cart works!</p>
+<div class="row">
+    <div class="row" style="width:100%">
+    <div class="p-0" >
+      <button class="btn btn-success" (click)="open(content)" >Dodaj wycieczkę</button>
+    </div>
+    </div>
+    
+  <ul class="list-group" *ngFor="let t of _toursWithStyle">
+<app-tour [tour]="t.tour" [style]="t.priceStyle" (toDelete)="deleteTour($event)" ></app-tour>
+  </ul>
+</div>

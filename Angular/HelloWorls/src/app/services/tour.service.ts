@@ -10,10 +10,13 @@ export class TourService {
 
   private reservationAmountSource = new BehaviorSubject<number>(0);
       reservationAmount = this.reservationAmountSource.asObservable();
+      reservation:Tour[]=[]
   //private tours :Tour[] = JSON.parse(data);
 
 
+
   constructor(private http: HttpClient) {
+    console.log("start")
     //this.getToursFromFile().subscribe(v=>this.tours = v);
 
   }
@@ -25,8 +28,9 @@ export class TourService {
 
 
 
-      public changeReservation(val:number){
+      public changeReservation(val:number,tour:Tour){
         this.reservationAmountSource.next(this.reservationAmountSource.getValue() + val)
+        this.reservation.push(tour);
       }
 
 

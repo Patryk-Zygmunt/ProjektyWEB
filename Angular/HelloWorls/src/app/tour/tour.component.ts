@@ -40,7 +40,7 @@ export class TourComponent implements OnInit {
   toDelete = new EventEmitter<string>();
 
   public set places(p: number){
-    this.tourService.changeReservation( this._tour.places -p)
+    this.tourService.changeReservation( this._tour.places -p,this._tour)
     this._tour.places  = p
     this._places  = p
     this.placesAmountChanged(p,this._tour.maxPlaces)
