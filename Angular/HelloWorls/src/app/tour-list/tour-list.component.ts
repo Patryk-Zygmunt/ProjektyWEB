@@ -17,7 +17,7 @@ export class TourListComponent implements OnInit {
   ngOnInit() {
     this.tourService.reservationAmount
       .subscribe(v=>this.reservation = v);
-    this.toursWithStyle   = this.tourService.getTours()
+    this.tourService.getTours().subscribe(v=> this.toursWithStyle   =v)
   }
 
 
@@ -30,7 +30,7 @@ export class TourListComponent implements OnInit {
 
   deleteTour(name:string){
     this.tourService.deleteTour(name);
-    this.toursWithStyle   = this.tourService.getTours();
+    //this.toursWithStyle   = this.tourService.getTours();
   }
 
   set toursWithStyle( tours: Tour[]){

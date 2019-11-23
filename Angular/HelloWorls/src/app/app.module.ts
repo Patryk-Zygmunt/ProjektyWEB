@@ -13,6 +13,8 @@ import { CartComponent } from './cart/cart.component';
 import {HttpClientModule} from "@angular/common/http";
 import { TourDateComponent } from './tour-date/tour-date.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DbService} from "./services/db.service";
+import {InMemoryWebApiModule} from "angular-in-memory-web-api";
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    InMemoryWebApiModule.forRoot(DbService),
     AppRoutingModule
   ],
   providers: [],

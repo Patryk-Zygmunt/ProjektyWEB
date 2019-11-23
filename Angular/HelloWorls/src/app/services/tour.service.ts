@@ -11,8 +11,7 @@ export class TourService {
   private reservationAmountSource = new BehaviorSubject<number>(0);
       reservationAmount = this.reservationAmountSource.asObservable();
       reservation:Tour[]=[]
-  //private tours :Tour[] = JSON.parse(data);
-
+  private readonly URL = "http://localhost:8080/api/";
 
 
   constructor(private http: HttpClient) {
@@ -21,11 +20,9 @@ export class TourService {
 
   }
 
-   getToursFromFile() {
-   // return  this.http.get<Tour[]>('assets/data.json')
+   getTours() {
+     return  this.http.get<Tour[]>(this.URL + 'tours')
   }
-
-
 
 
       public changeReservation(val:number,tour:Tour){
@@ -33,10 +30,6 @@ export class TourService {
         this.reservation.push(tour);
       }
 
-
-      public getTours():Tour[]{
-      return this.tours;
-        }
 
     public getTour(n: number):Tour{
       return this.tours[n];
@@ -192,6 +185,6 @@ readonly  images = [
   ]
 
 
-  private tours :Tour[] = Array.apply(null, new Array(10)).map((_,idx)=> this.getRandomTour("Wycieczka " + idx));
+ private tours :Tour[] = Array.apply(null, new Array(10)).map((_,idx)=> this.getRandomTour("Wycieczka " + idx));
 
 }
