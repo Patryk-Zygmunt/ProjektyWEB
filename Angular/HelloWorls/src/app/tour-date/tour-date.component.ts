@@ -27,7 +27,7 @@ export class TourDateComponent {
       this.fromDate = date;
     } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
       this.toDate = date;
-      this.tourDate.next({start:this.NgbDateToDate(this.fromDate),end: this.NgbDateToDate(this.fromDate)})
+      this.tourDate.next({start:this.NgbDateToDate(this.fromDate),end: this.NgbDateToDate(this.toDate)})
     } else {
       this.toDate = null;
       this.fromDate = date;

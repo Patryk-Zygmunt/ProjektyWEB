@@ -1,0 +1,45 @@
+<div class="signup-form">
+
+    <div class="form-group">
+      <label class="control-label col-xs-4">Nazwa</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" name="name"  >
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-xs-4">Kraj</label>
+      <div class="col-xs-8">
+        <angular2-multiselect [data]="countryList"
+                              [(ngModel)]="selectedTmpC"
+                              [settings]="settings"
+                              (onSelect)="onCountrySelect($event)"
+                              (onDeSelect)="onCountryDeSelect($event)"
+                              (onDeSelectAll)="onCountryDeSelectAll($event)"
+>
+        </angular2-multiselect>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-xs-4">Cena</label>
+      <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (mouseup)="filterPrice()"> ></ng5-slider>
+    </div>
+
+  <angular2-multiselect [data]="ratesList"
+                        [(ngModel)]="selectedTmpR"
+                        [settings]="settings"
+                        (onSelect)="onRateSelect($event)"
+                        (onDeSelect)="OnRateDeSelect($event)"
+                        (onDeSelectAll)="OnRateDeSelectAll($event)"
+  >
+  </angular2-multiselect>
+
+
+    <app-tour-date (tourDate)="dateChoosen($event)"></app-tour-date>
+    <div class="form-group">
+      <div class="col-xs-8 col-xs-offset-4">
+        <button  class="btn btn-primary btn-lg" (click)="filter()">Filtruj</button>
+      </div>
+    </div>
+</div>

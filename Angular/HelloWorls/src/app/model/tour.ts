@@ -1,8 +1,9 @@
 interface Tour {
+  id:number;
   name:string,
   country:string,
   description:string,
-  imageUrl:string,
+  imageUrl:string[],
   price:number,
   places:number,
   maxPlaces:number,
@@ -10,5 +11,6 @@ interface Tour {
   rate:number,
   rateAmount:number,
   end:Date,
+  comments:{text:string,date:Date,user?:string}[]
 }
 

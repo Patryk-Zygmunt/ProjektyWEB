@@ -9,10 +9,4 @@ describe('TourService', () => {
     const service: TourService = TestBed.get(TourService);
     expect(service).toBeTruthy();
   });
-
-  it('should create tour', () => {
-    const service: TourService = TestBed.get(TourService);
-console.log(service.getRandomTour("tura"))  });
-
-
-});
+)}

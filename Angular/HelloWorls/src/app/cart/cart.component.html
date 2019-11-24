@@ -1,11 +1,14 @@
+<div class="container">
+
 <div class="row">
     <div class="row" style="width:100%">
     <div class="p-0" >
-      <button class="btn btn-success" (click)="open(content)" >Dodaj wycieczkę</button>
+      <button class="btn btn-success">{{cost}}</button>
     </div>
     </div>
-    
-  <ul class="list-group" *ngFor="let t of _toursWithStyle">
-<app-tour [tour]="t.tour" [style]="t.priceStyle" (toDelete)="deleteTour($event)" ></app-tour>
+
+  <ul class="list-group" *ngFor="let t of tours">
+<app-tour [tour]="t.tour"  (toDelete)="deleteTour($event)" ></app-tour>
   </ul>
+</div>
 </div>

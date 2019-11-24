@@ -1,0 +1,28 @@
+<div  class="comments">
+  <div  class="comment-wrap">
+    <div class="photo">
+      <div class="avatar" style="background-image: url('https://community.smartsheet.com/sites/default/files/default_user.jpg')"></div>
+    </div>
+    <div class="comment-block">
+      <form action="">
+        <textarea [(ngModel)] ="newComment"  name="newComment" id="" cols="30" rows="3" placeholder="Nowy komentarz..."></textarea>
+      </form>
+    </div>
+  </div>
+  <button type="button" class="btn btn-success" (click) = "addComment()">Dodaj</button>
+  <div  *ngFor="let comment of  tour.comments"  class="comment-wrap">
+    <div class="photo">
+      <div class="avatar" style="background-image: url('https://community.smartsheet.com/sites/default/files/default_user.jpg')"></div>
+    </div>
+    <div class="comment-block">
+      <p class="comment-text">{{comment.text}}</p>
+      <div class="bottom-comment">
+        <div class="comment-date">{{comment.date | date:'shortDate'}}</div>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="tour.comments.length<1" class="comment-wrap">
+    <h5> Brak komentarzy</h5>
+  </div>
+</div>

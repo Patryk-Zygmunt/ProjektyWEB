@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TourService } from '../services/tour.service';
+import {ReservationService} from "../services/reservation.service";
+import {Reservation} from "../model/reservation";
 
 @Component({
   selector: 'app-cart',
@@ -8,19 +10,23 @@ import { TourService } from '../services/tour.service';
 })
 export class CartComponent implements OnInit {
 
-  _toursWithStyle;
+  tours:Reservation[]=[];
+  cost:number;
 
-  constructor(private tourService:TourService) { }
+  constructor(private tourService:TourService,private reservationService:ReservationService) { }
 
   ngOnInit() {
-    console.log( this.tourService.reservation)
-    this.toursWithStyle = this.tourService.reservation
+  this.fetchReservation()
+    this.reservationService.reservationValue.subscribe(v=>this.cost = v)
+  }
+
+
+  fetchReservation(){
+    this.reservationService.getResrvations().subscribe(v=>this.tours = v)
 
   }
 
-  set toursWithStyle( tours: Tour[]){
-    this._toursWithStyle = tours.map(t=>({tour:t, priceStyle:'text-info'}));
-  }
+
 
 
 
