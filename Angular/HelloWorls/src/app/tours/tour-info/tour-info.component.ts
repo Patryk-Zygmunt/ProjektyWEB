@@ -15,9 +15,9 @@ import {Reservation} from "../../model/reservation";
 })
 export class TourInfoComponent extends TourShortInfoComponent implements OnInit {
 
-  constructor(public tourService: TourService, config: NgbRatingConfig, public reservationService: ReservationService,private route: ActivatedRoute)
+  constructor(public tourService: TourService, config: NgbRatingConfig, public reservationService: ReservationService,public route: ActivatedRoute)
     {
-      super(tourService,config,reservationService);
+      super(tourService,config,reservationService,route);
     }
 
     reservation:Reservation;

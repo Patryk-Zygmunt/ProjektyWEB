@@ -17,27 +17,24 @@ export class TourService {
     console.log("start")
   }
 
-
-
    getTours() {
      return  this.http.get<Tour[]>(this.URL + '/tours')
   }
 
-
-
-    public getTour(id: number){
-      return this.http.get<Tour>(`${this.URL}/tours/${id}`);
+  public getTour(id: number){
+      return this.http.get<Tour>(`${this.URL}/tour/${id}`);
    }
+
    public addTour(t: Tour){
-     return this.http.post(this.URL + '/tours',t)
+     return this.http.post(this.URL + '/tour',t)
    }
 
   deleteTour(id: number){
-    return this.http.delete(`${this.URL}/tours/${id}`);
+    return this.http.delete(`${this.URL}/tour/${id}`);
   }
 
   public updateTour(t: Tour){
-    return this.http.put(this.URL + '/tours/'+t.id,t)
+    return this.http.put(this.URL + '/tour/'+t.id,t)
   }
 
 
