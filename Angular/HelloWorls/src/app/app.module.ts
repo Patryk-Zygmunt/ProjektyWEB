@@ -29,6 +29,11 @@ import { TourInfoComponent } from './tours/tour-info/tour-info.component';
 import { CommentsComponent } from './comments/comments.component';
 import {GalleryModule} from "@ks89/angular-modal-gallery";
 import { TourBaseComponent } from './tours/tour-base/tour-base.component';
+import {environment} from "../environments/environment";
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AuthComponent } from './auth/auth.component';
+
 
 @NgModule({
   declarations: [
@@ -48,6 +53,7 @@ import { TourBaseComponent } from './tours/tour-base/tour-base.component';
     CountryPipe,
     TourInfoComponent,
     CommentsComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,9 +64,12 @@ import { TourBaseComponent } from './tours/tour-base/tour-base.component';
     Ng5SliderModule,
     AngularMultiSelectModule,
     GalleryModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+
     AppRoutingModule
   ],
-  providers: [PricePipe,DatePipe,RatePipe,CountryPipe],
+  providers: [PricePipe, DatePipe, RatePipe, CountryPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
