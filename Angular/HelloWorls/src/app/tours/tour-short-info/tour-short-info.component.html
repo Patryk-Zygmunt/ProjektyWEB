@@ -1,6 +1,6 @@
 <li class="media list-group-item">
   <div class="row">
-    <div class="col-3 border-right" [routerLink]="'tour-short-info/'+ _tour.id" >
+    <div class="col-3 border-right" [routerLink]="'tour-short-info/'+ _tour._id" >
       <img src="{{_tour.imageUrl[0]}}"
            class="mr-3 rounded-circle" width="200px" height="200px">
     </div>
@@ -19,8 +19,8 @@
         <button type="button" [ngClass] = "placesClass" >Ilość miejsc {{_tour.places}}/{{_tour.maxPlaces}}</button>
         <button type="button" [disabled]="_tour.places<=0" [ngClass] = "reservationClass" (click)="places=_tour.places - 1">Rezerwuj</button>
         <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="places=_tour.places + 1">Zrezygnuj</button>
-        <button type="button" [disabled]="false" [ngClass] = "'btn btn-danger'" (click)="toDelete.next(_tour.id)">Usuń</button>
-        <button type="button"  class="btn-primary" [routerLink]="'tour-short-info/'+ _tour.id">Szczegóły</button>
+        <button type="button" [disabled]="false" [ngClass] = "'btn btn-danger'" (click)="toDelete.next(_tour._id)">Usuń</button>
+        <button type="button"  class="btn-primary" [routerLink]="'tour-short-info/'+ _tour._id">Szczegóły</button>
       </div>
 
     </div>

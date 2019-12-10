@@ -15,8 +15,11 @@ export class CartMenuComponent implements OnInit {
   constructor(private reservationService:ReservationService) { }
 
   ngOnInit() {
-    this.reservationService.reservationValue.subscribe(v=>this.cost = v)
-    this.reservationService.reservationAmount.subscribe(v=>this.amount = v)
+    this.reservationService.getReservations().subscribe(res=>{
+      this.reservationService.reservationValue.subscribe(v=>this.cost = res.reduce((pv, cv)=>cv.cost+cv.cost,0))
+      this.reservationService.reservationAmount.subscribe(v=>this.amount = res.reduce((pv, cv)=>cv.places+cv.places,0))
+    })
+
   }
 
 

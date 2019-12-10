@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {environment} from "../../environments/environment";
 //import * as data from 'assert/data.json';
 
 @Injectable({
@@ -10,31 +11,30 @@ import {map} from "rxjs/operators";
 export class TourService {
 
 
-  private readonly URL = "http://localhost:8080/api";
+  private readonly URL = environment.server_url + 'tour';
 
 
   constructor(private http: HttpClient) {
-    console.log("start")
   }
 
    getTours() {
-     return  this.http.get<Tour[]>(this.URL + '/tours')
+     return  this.http.get<Tour[]>(this.URL + '/all')
   }
 
-  public getTour(id: number){
-      return this.http.get<Tour>(`${this.URL}/tour/${id}`);
+  public getTour(id: string){
+      return this.http.get<Tour>(`${this.URL}/${id}`);
    }
 
    public addTour(t: Tour){
-     return this.http.post(this.URL + '/tour',t)
+     return this.http.post(this.URL,t)
    }
 
   deleteTour(id: number){
-    return this.http.delete(`${this.URL}/tour/${id}`);
+    return this.http.delete(`${this.URL}/${id}`);
   }
 
   public updateTour(t: Tour){
-    return this.http.put(this.URL + '/tour/'+t.id,t)
+    return this.http.put(this.URL + '/'+t._id,t)
   }
 
 

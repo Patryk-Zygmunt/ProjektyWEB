@@ -12,13 +12,13 @@ export class TourBaseComponent {
   }
 
   public set places(p: number) {
-    this.reservationService.changeReservation( this._tour.places - p, this._tour);
+    this.reservationService.changeReservation( this._tour.places - p, p * this._tour.price);
     this._tour.places  = p;
     this._places  = p;
     this.placesAmountChanged(p, this._tour.maxPlaces);
   }
 
-  //TODO znika user rate bo update leci
+
   public set userRate(rate: number) {
     if (!rate) { return; }
     this._userRate = rate;

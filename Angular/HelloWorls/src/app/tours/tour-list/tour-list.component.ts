@@ -49,7 +49,6 @@ export class TourListComponent implements OnInit {
 
   }
 
-
   set toursWithStyle( tours:{tour:Tour,priceStyle?:string}[]){
     this._toursWithStyle = tours.map(t=>({tour:t.tour, priceStyle:'text-info'}));
     this.findMaxAndMinPrice();

@@ -23,7 +23,7 @@
         <button type="button" [ngClass] = "placesClass" >Ilość miejsc {{_tour.places}}/{{_tour.maxPlaces}}</button>
         <button type="button" [disabled]="_tour.places<=0" [ngClass] = "reservationClass" (click)="places=_tour.places - 1">Rezerwuj</button>
         <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="places=_tour.places + 1">Zrezygnuj</button>
-        <button type="button" [disabled]="false" [ngClass] = "'btn btn-danger'" (click)="toDelete.next(_tour.id)">Usuń</button>
+        <button type="button" [disabled]="false" [ngClass] = "'btn btn-danger'" (click)="toDelete.next(_tour._id)">Usuń</button>
 
       </div>
 

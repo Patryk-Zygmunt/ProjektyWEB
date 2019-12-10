@@ -1,7 +1,7 @@
 let mongoose = require('mongoose');
-let url ="mongodb+srv://spol-user:spoldbpass@spolecznidb-zr43h.mongodb.net/comment?retryWrites=true" 
+//let url ="mongodb+srv://spol-user:spoldbpass@spolecznidb-zr43h.mongodb.net/stat?retryWrites=true"
 
-//const url = process.MONGO_URL ? process.env.MONGO_URL : "mongodb://localhost:27017/wiki-animals?waitQueueMultiple=1";
+const url = process.env.MONGO_URL ? process.env.MONGO_URL : "mongodb://localhost:27017/wiki-animals?waitQueueMultiple=1";
 
 class Database {
     constructor() {
@@ -14,7 +14,7 @@ class Database {
                 console.log('Database connection successful')
             })
             .catch(err => {
-                console.error('Database connection error')
+                console.error('Database connection error',err)
     })
     }
 }

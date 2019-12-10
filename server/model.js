@@ -2,7 +2,6 @@ let mongoose = require('mongoose');
 let db = require('./db')
 
 let Tour = new mongoose.Schema({
-    id:String,
     name:String,
     country:String,
     description:String,
@@ -23,9 +22,13 @@ let Reservation = new mongoose.Schema({
     user:String,
     start:Date,
     end:Date,
-    places:Number
+    places:Number,
+    cost:Number
   })
 
 
-module.exports.tour = mongoose.model('tour', Tour)
-module.exports.reservation = mongoose.model('reservation', Reservation)
+exports.tour = mongoose.model('tour', Tour)
+exports.reservation = mongoose.model('reservation', Reservation)
+
+
+

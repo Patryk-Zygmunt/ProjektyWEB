@@ -1,5 +1,5 @@
 interface Tour {
-  id:number;
+  _id:number;
   name:string,
   country:string,
   description:string,

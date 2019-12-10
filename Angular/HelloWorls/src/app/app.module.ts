@@ -4,7 +4,6 @@ import 'hammerjs';
 import 'mousetrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TableComponent } from './table/table.component';
 import { TourShortInfoComponent } from './tours/tour-short-info/tour-short-info.component';
 import { TourListComponent } from './tours/tour-list/tour-list.component';
 import { InformationComponent } from './information/information.component';
@@ -34,7 +33,6 @@ import { TourBaseComponent } from './tours/tour-base/tour-base.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TableComponent,
     TourShortInfoComponent,
     TourListComponent,
     InformationComponent,
@@ -57,7 +55,6 @@ import { TourBaseComponent } from './tours/tour-base/tour-base.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    InMemoryWebApiModule.forRoot(DbService),
     Ng5SliderModule,
     AngularMultiSelectModule,
     GalleryModule.forRoot(),

@@ -41,8 +41,8 @@ selectedRates:number[] = []
 
     this.minValue = floor
     this.maxValue = ceil
-    this.countryList = tour.map(t=>{ return {id:t.id,itemName:t.country}}).filter((v, i, a) => a.findIndex(va=>va.itemName==v.itemName) === i)
-     // this.nameList = tour-short-info.map(t=>{ return {id:t.id,itemName:t.country}})
+    this.countryList = tour.map(t=>{ return {id:t._id,itemName:t.country}}).filter((v, i, a) => a.findIndex(va=>va.itemName==v.itemName) === i)
+     // this.nameList = tour-short-info.map(t=>{ return {_id:t._id,itemName:t.country}})
   }
 
   settings = {

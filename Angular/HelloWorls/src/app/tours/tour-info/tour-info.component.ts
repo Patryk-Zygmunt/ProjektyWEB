@@ -24,10 +24,10 @@ export class TourInfoComponent extends TourShortInfoComponent implements OnInit 
 
   ngOnInit() {
 
-      let id = parseInt(this.route.snapshot.paramMap.get('id'));
+      let id = this.route.snapshot.paramMap.get('_id');
     this.tourService.getTour(id)
       .subscribe(v=>this.tour=v)
-    this.reservationService.getResrvation(id)
+    this.reservationService.getReservation(id)
       .subscribe(v=>this.reservation = v)
   }
 
