@@ -7,6 +7,7 @@ import {ActivatedRoute} from "@angular/router";
 import {LineLayout, PlainGalleryConfig, PlainGalleryStrategy, Image} from "@ks89/angular-modal-gallery";
 import {TourGenerationService} from "../../services/tour-generation.service";
 import {Reservation} from "../../model/reservation";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-tour-info',
@@ -15,21 +16,34 @@ import {Reservation} from "../../model/reservation";
 })
 export class TourInfoComponent extends TourShortInfoComponent implements OnInit {
 
-  constructor(public tourService: TourService, config: NgbRatingConfig, public reservationService: ReservationService,public route: ActivatedRoute)
+
+  tourForm :FormGroup
+  constructor(public tourService: TourService, config: NgbRatingConfig, public reservationService: ReservationService,public route: ActivatedRoute,private formBuilder: FormBuilder
+)
     {
       super(tourService,config,reservationService,route);
     }
 
-    reservation:Reservation;
+  async ngOnInit() {
 
-  ngOnInit() {
-
-      let id = this.route.snapshot.paramMap.get('_id');
-    this.tourService.getTour(id)
-      .subscribe(v=>this.tour=v)
-    this.reservationService.getReservation(id)
-      .subscribe(v=>this.reservation = v)
+    let id = this.route.snapshot.paramMap.get('_id');
+    this.reservationService.getUserTourReservation(localStorage.getItem("user_id"), id)
+      .subscribe(v => {this.reservation = v})
+    this.tour = await this.tourService.getTour(id).toPromise()
+    this.tourForm = this.formBuilder.group({
+      places: [0, [Validators.required, Validators.min(1), Validators.max(this._tour.places)]]
+    })
   }
+
+
+
+  set tour(t:Tour){
+    this._tour = t;
+    this.images = t.imageUrl.map((img,idx)=>new Image(idx, {
+      img: img,
+    }))
+  }
+
 
 
   plainGalleryRow: PlainGalleryConfig = {
@@ -39,15 +53,14 @@ export class TourInfoComponent extends TourShortInfoComponent implements OnInit 
 
   images = []
 
-  set tour(t:Tour){
-    this._tour = t;
-    this.images = t.imageUrl.map((img,idx)=>new Image(idx, {
-      img: img,
-    }))
-  }
+
 
   choosenDate(date: { start: Date; end: Date }) {
-    this._tour.start = date.start;
-    this._tour.end = date.end;
+  //  this._tour.start = date.start;
+  //  this._tour.end = date.end;
+  }
+
+  removeReservation() {
+
   }
 }

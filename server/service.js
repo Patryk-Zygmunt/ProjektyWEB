@@ -57,7 +57,7 @@ exports.getReservations = (res) => {
 
 
 exports.getReservation = (filter, res)=> {
-    model.reservation.findOne(filter,(err,result)=>{
+    model.reservation.find(filter,(err,result)=>{
         res.send(result)
     })
 }
@@ -97,6 +97,7 @@ exports.updateReservation = (body,id, res)=> {
  exports.init = () => {
     fs.readFile('./data.json', async (err, data) => {
         await model.tour.deleteMany();
+        await model.reservation.deleteMany();
         model.tour.create(JSON.parse(data), (err, result) => {
             //console.log('Init: ', result)
         })

@@ -45,11 +45,13 @@ app.get('/reservation/:id', (req, res) =>{
     service.getReservation({_id:req.params.id}, res);
 })
 
-app.get('/reservation/user/:id', (req, res) =>{
+app.get('/reservation/user/:user', (req, res) =>{
     service.getReservation({user:req.params.user}, res);
 })
 
-
+app.get('/reservation/user/:user/tour/:tourId', (req, res) =>{
+    service.getReservation({user:req.params.user, tourId:req.params.tourId}, res);
+})
 
 app.post('/reservation', (req, res) =>{
     service.addReservation(req.body, res);

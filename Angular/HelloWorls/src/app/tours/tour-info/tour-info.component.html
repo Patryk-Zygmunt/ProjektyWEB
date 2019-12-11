@@ -1,8 +1,8 @@
 
-<div class="container">
+<div *ngIf="_tour" class="container">
 <li class="media list-group-item">
   <div class="row">
-    <div class="col-3 border-right">
+    <div  class="col-3 border-right">
       <img src="{{_tour.imageUrl[0]}}"
            class="mr-3 rounded-circle" width="250px" height="250px">
       <ks-modal-gallery [id]="1" [modalImages]="images"
@@ -12,18 +12,39 @@
 
       <h3>{{_tour.country | uppercase}} {{_tour.name | uppercase}}
         <div class="float-right">
-          <small>    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>
+<!--          <small>    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>-->
           <!--          <app-tour-short-info-date (tourDate)="dateChoosen($event)"></app-tour-short-info-date>-->
-        </div>  </h3>
+        </div>
+      </h3>
       <p>{{_tour.description}}
         <b>Ocena:</b><ngb-rating [(rate)]="userRate" ></ngb-rating> {{_tour.rate}}/5
       </p>
       <b>Cena: <h3 [ngClass] = "'text-info'">{{_tour.price | currency:'PLN'}}</h3> </b>
       <div class="float-right">
         <button type="button" [ngClass] = "placesClass" >Ilość miejsc {{_tour.places}}/{{_tour.maxPlaces}}</button>
-        <button type="button" [disabled]="_tour.places<=0" [ngClass] = "reservationClass" (click)="places=_tour.places - 1">Rezerwuj</button>
-        <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="places=_tour.places + 1">Zrezygnuj</button>
-        <button type="button" [disabled]="false" [ngClass] = "'btn btn-danger'" (click)="toDelete.next(_tour._id)">Usuń</button>
+        <button type="button"  [disabled]="!tourForm.valid || _tour.places<=0" [ngClass] = "reservationClass" (click)="makeReservation(tourForm.get('places').value)">Rezerwuj</button>
+        <div  class="form-group" [formGroup]="tourForm" >
+          <label class="control-label col-xs-4">Ilość miejsc</label>
+          <div class="col-xs-8">
+            <label>
+              <input type="number" class="form-control"  name="places"   formControlName="places">
+            </label>
+
+
+            <div *ngIf="tourForm.get('places').touched &&  tourForm.get('places').errors?.required" class="help-block m-1" >
+              <small style="color: #df4930">Pole jest wymagane</small>
+            </div>
+
+            <div *ngIf="tourForm.get('places').touched && tourForm.get('places').errors?.min" class="help-block m-1">
+              <small style="color: #df4930">Wartość musi być wieksza od 0</small>
+            </div>
+            <div *ngIf="tourForm.get('places').touched && tourForm.get('places').errors?.max" class="help-block m-1">
+              <small style="color: #df4930">Na tą wycieczkę nie ma już tylu miejsc</small>
+            </div>
+          </div>
+
+        </div>
+        <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="removeReservation()">Zrezygnuj</button>
 
       </div>
 

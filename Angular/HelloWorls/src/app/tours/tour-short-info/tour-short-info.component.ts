@@ -20,6 +20,11 @@ export class TourShortInfoComponent extends TourBaseComponent implements OnInit 
   ngOnInit() {
   }
 
+  @Input('style')
+  priceStyle
+  hoveredRate: number;
+
+
   @Input('tour')
   public set tour(t: Tour) {
     this._tour  = t;

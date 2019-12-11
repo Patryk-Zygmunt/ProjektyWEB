@@ -5,7 +5,7 @@ import 'mousetrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TourShortInfoComponent } from './tours/tour-short-info/tour-short-info.component';
-import { TourListComponent } from './tours/tour-list/tour-list.component';
+import { TourListComponent } from './tour-list/tour-list/tour-list.component';
 import { InformationComponent } from './information/information.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { NewTourComponent } from './new-tour/new-tour.component';
@@ -34,6 +34,10 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AuthComponent } from './auth/auth.component';
 
+import { AdminListComponent } from './tour-list/admin-list/admin-list.component';
+import { ClientListComponent } from './tour-list/client-list/client-list.component';
+import { AdminTourComponent } from './tours/admin-tour/admin-tour.component';
+import {EditTourComponent} from "./edit-tour/edit-tour.component";
 
 @NgModule({
   declarations: [
@@ -53,6 +57,10 @@ import { AuthComponent } from './auth/auth.component';
     CountryPipe,
     TourInfoComponent,
     CommentsComponent,
+    AdminListComponent,
+    ClientListComponent,
+    AdminTourComponent,
+    EditTourComponent,
     AuthComponent,
   ],
   imports: [

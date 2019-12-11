@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TourService} from "../../services/tour.service";
 import {NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
 import {ReservationService} from "../../services/reservation.service";
+import {Reservation} from "../../model/reservation";
 
 
 export class TourBaseComponent {
@@ -11,14 +12,41 @@ export class TourBaseComponent {
     config.max = 5;
   }
 
-  public set places(p: number) {
-    this.reservationService.changeReservation( this._tour.places - p, p * this._tour.price);
-    this._tour.places  = p;
-    this._places  = p;
-    this.placesAmountChanged(p, this._tour.maxPlaces);
+  _tour: Tour;
+  _userRate = 0;
+  reservation:Reservation;
+
+
+  placesClass = ['btn', 'btn-info'];
+  reservationClass = ['btn', 'btn-success'];
+  resignationClass = ['btn', 'btn-danger'];
+
+
+  @Output()
+  toUpdate = new EventEmitter<number>();
+
+
+  //TODO
+  public makeReservation(p: number) {
+    let reservation: Reservation = {
+      cost: p * this._tour.price,
+      end: undefined,
+      places: p,
+      start: undefined,
+      tourId: this._tour._id,
+      user: localStorage.getItem("user_id")
+    } as Reservation
+    this.reservationService.addReservation(reservation).subscribe(() => {
+      this.reservationService.changeReservation(p, p * this._tour.price);
+      this._tour.places -= p;
+      this.reservation = reservation
+      this.placesAmountChanged(this._tour.places, this._tour.maxPlaces);
+      this.tourService.updateTour(this._tour).subscribe(() => this.toUpdate.next(p));
+    })
   }
 
 
+  //TODO
   public set userRate(rate: number) {
     if (!rate) { return; }
     this._userRate = rate;
@@ -27,25 +55,6 @@ export class TourBaseComponent {
     this.tourService.updateTour(this._tour).subscribe(()=>  this.toUpdate.next(rate));
 
   }
-
-
-  _tour: Tour;
-  private _userRate = 0;
-
-
-  private _places = 0;
-  placesClass = ['btn', 'btn-info'];
-  reservationClass = ['btn', 'btn-success'];
-  resignationClass = ['btn', 'btn-danger'];
-
-
-
-  @Output()
-  toDelete = new EventEmitter<number>();
-
-  @Output()
-  toUpdate = new EventEmitter<number>();
-
 
 
 

@@ -1,0 +1,92 @@
+<div class="signup-form">
+  <form class="form-horizontal" [formGroup]="tourForm"  (ngSubmit)="addTour($event)">
+
+    <div class="form-group">
+      <label class="control-label col-xs-4">Nazwa</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" name="name"  formControlName="name">
+
+        <div *ngIf="tourForm.get('name').touched && tourForm.get('name').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="tourForm.get('name').touched && tourForm.get('name').errors?.minlength" class="help-block m-1">
+          <small style="color: #df4930">Pole musi być dłuższe niż 3 znaki</small>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-xs-4">Kraj</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" name="country"    formControlName="country">
+
+        <div *ngIf="tourForm.get('country').touched &&  tourForm.get('country').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="tourForm.get('country').touched && tourForm.get('country').errors?.minlength" class="help-block m-1">
+          <small style="color: #df4930">Pole musi być dłuższe niż 3 znaki</small>
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Opis</label>
+      <div class="col-xs-8">
+        <textarea  class="form-control" name="description"    formControlName="description">
+        </textarea>
+
+        <div *ngIf="tourForm.get('description').touched &&  tourForm.get('description').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="tourForm.get('description').touched && tourForm.get('description').errors?.minlength" class="help-block m-1">
+          <small style="color: #df4930">Pole musi być dłuższe niż 3 znaki</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Cena</label>
+      <div class="col-xs-8">
+        <input type="number" class="form-control"  name="price"   formControlName="price">
+
+        <div *ngIf="tourForm.get('price').touched &&  tourForm.get('price').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="tourForm.get('price').touched && tourForm.get('price').errors?.minlength" class="help-block m-1">
+          <small style="color: #df4930">Wartość musi być wieksza od 0</small>
+        </div>
+
+
+
+
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Ilość miejsc</label>
+      <div class="col-xs-8">
+        <input type="number" class="form-control"  name="places"   formControlName="places">
+
+
+        <div *ngIf="tourForm.get('maxPlaces').touched &&  tourForm.get('maxPlaces').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="tourForm.get('maxPlaces').touched && tourForm.get('maxPlaces').errors?.minlength" class="help-block m-1">
+          <small style="color: #df4930">Wartość musi być wieksza od 0</small>
+        </div>
+      </div>
+
+    </div>
+    <app-tour-date (tourDate)="dateChoosen($event)"></app-tour-date>
+    <div class="form-group">
+      <div class="col-xs-8 col-xs-offset-4">
+        <button  type="submit" [disabled]="!tourForm.valid" class="btn btn-success btn-lg">Dodaj wycieczkę</button>
+      </div>
+    </div>
+  </form>
+</div>

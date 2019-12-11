@@ -23,7 +23,7 @@ export class CartComponent implements OnInit {
 
 
   async fetchReservation() {
-    this.reservations = await this.reservationService.getReservations().toPromise()
+    this.reservations = await this.reservationService.getUserReservations(localStorage.getItem("user_id")).toPromise()
     this.reservations.forEach(r=>{
       this.tourService.getTour(r._id)
         .subscribe(t=>this.tours.push(t))

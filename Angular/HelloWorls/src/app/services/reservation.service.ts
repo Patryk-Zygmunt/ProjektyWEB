@@ -11,8 +11,8 @@ import {HttpClient} from "@angular/common/http";
 export class ReservationService {
 
   private readonly URL = environment.server_url + 'reservation';
-  private reservationAmountSource = new BehaviorSubject<number>(0);
-  private reservationValueSource = new BehaviorSubject<number>(0);
+  reservationAmountSource = new BehaviorSubject<number>(0);
+  reservationValueSource = new BehaviorSubject<number>(0);
   reservationAmount = this.reservationAmountSource.asObservable();
   reservationValue = this.reservationValueSource.asObservable();
 
@@ -31,9 +31,16 @@ export class ReservationService {
   public getReservation(id: string){
     return this.http.get<Reservation>(`${this.URL}/${id}`);
   }
+  public getUserTourReservation(userId: string,tourId:string) {
+    return this.http.get<Reservation>(`${this.URL}/user/${userId}/tour/${tourId}`);
+  }
 
-  public addReservation(t: Reservation,price){
-    this.changeReservation(t.places, price)
+  public getUserReservations(userId: string) {
+    return this.http.get<Reservation[]>(`${this.URL}/user/${userId}`);
+  }
+
+  public addReservation(t: Reservation){
+    this.changeReservation(t.places, t.cost)
     return this.http.post(this.URL,t)
   }
 
