@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-3" >
+      <app-filter (filters)="filter($event)"  [tours]="_tours"></app-filter>
+    </div>
+
+    <div class="col-9" >
+
+      <div class="row">
+        <div class="row" style="width:100%">
+          <div class="col-4 p-0" >
+          </div>
+          <div class="col-4 p-0">
+          </div>
+          <div class="col-4 p-0">
+            <app-cart-menu></app-cart-menu>
+          </div>
+        </div>
+        <ul class="list-group" *ngFor="let t of ( toursWithStyle | dynamicFilter:filters)">
+          <app-tour [tour]="t.tour" [style]="t.priceStyle" (toUpdate)="updateTours()"></app-tour>
+        </ul>
+      </div>
+      <app-information></app-information>
+    </div>
+  </div>
+</div>
+
+
+

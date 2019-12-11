@@ -1,0 +1,45 @@
+<ng-template #content let-modal >
+  <div class="container-fluid" style="width:550px;background-color: white">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Dodaj wycieczkę</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" >
+      <app-edit-tour (added)="modal.dismiss();updateTour()" [tour]="_tour"></app-edit-tour>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<li class="media list-group-item">
+  <div class="row">
+    <div class="col-3 border-right" [routerLink]="'tour-short-info/'+ _tour._id" >
+      <img src="{{_tour.imageUrl[0]}}"
+           class="mr-3 rounded-circle" width="200px" height="200px">
+    </div>
+    <div class="col-9">
+
+      <h4>{{_tour.country | uppercase}} {{_tour.name | uppercase}}
+        <div class="float-right">
+          <small>    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>
+          <!--          <app-tour-short-info-date (tourDate)="dateChoosen($event)"></app-tour-short-info-date>-->
+        </div>  </h4>
+      <p>{{_tour.description}}
+        <b>Ocena:</b><ngb-rating [(rate)]="_tour.rate"  ></ngb-rating> {{_tour.rate}}/5
+      </p>
+      <b>Cena: <h3>{{_tour.price | currency:'PLN'}}</h3> </b>
+      <div class="float-right">
+        <button type="button" [ngClass] = "placesClass" >Ilość miejsc {{_tour.places}}/{{_tour.maxPlaces}}</button>
+        <button type="button"  class="btn btn-success" (click)="open(content)">Edytuj</button>
+        <button type="button"  [ngClass] = "'btn btn-danger'" (click)="toDelete.next(_tour._id)">Usuń</button>
+<!--        <button type="button"  class="btn btn-primary" [routerLink]="'tour-short-info/'+ _tour._id">Szczegóły</button>-->
+      </div>
+
+    </div>
+  </div>
+
+</li>
