@@ -27,11 +27,13 @@ export class TourInfoComponent extends TourShortInfoComponent implements OnInit 
   async ngOnInit() {
 
     let id = this.route.snapshot.paramMap.get('_id');
-    this.reservationService.getUserTourReservation(localStorage.getItem("user_id"), id)
-      .subscribe(v => {this.reservation = v})
+    this._reservation = await this.reservationService.getUserTourReservation(localStorage.getItem("user_id"), id).toPromise()
+    console.log(this._reservation)
     this.tour = await this.tourService.getTour(id).toPromise()
+    console.log(this._tour)
+    console.log("sdsdsdsds")
     this.tourForm = this.formBuilder.group({
-      places: [0, [Validators.required, Validators.min(1), Validators.max(this._tour.places)]]
+      places: [this._reservation ? this._reservation.places : 0, [Validators.required, Validators.min(1), Validators.max(this._tour.places)]]
     })
   }
 
@@ -60,7 +62,5 @@ export class TourInfoComponent extends TourShortInfoComponent implements OnInit 
   //  this._tour.end = date.end;
   }
 
-  removeReservation() {
 
-  }
 }

@@ -44,15 +44,15 @@
           </div>
 
         </div>
-        <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="removeReservation()">Zrezygnuj</button>
+        <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="removeReservation();tourForm.get('places').reset(0)">Zrezygnuj</button>
 
       </div>
 
 
       <app-tour-date (tourDate)="choosenDate($event)"></app-tour-date>
         <div class="float-right">
-        <button type="button"  [ngClass] = "'btn btn-danger'">Rezerwacjie{{reservation?.places ? reservation?.places:0 }}</button>
-        <button type="button"  [ngClass] = "'btn btn-danger'">Koszt{{reservation?.places ? reservation?.places * _tour.price: 0 }}</button>
+        <button type="button"  [ngClass] = "'btn btn-danger'">Rezerwacjie{{tourForm.get('places').value }}</button>
+        <button type="button"  [ngClass] = "'btn btn-danger'">Koszt{{tourForm.get('places').value * _tour.price }}</button>
         </div>
 
     </div>

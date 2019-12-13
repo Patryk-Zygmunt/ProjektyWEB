@@ -40,11 +40,10 @@ export class ReservationService {
   }
 
   public addReservation(t: Reservation){
-    this.changeReservation(t.places, t.cost)
     return this.http.post(this.URL,t)
   }
 
-  deleteReservation(id: number){
+  deleteReservation(id: string){
     return this.http.delete(`${this.URL}/${id}`);
   }
 

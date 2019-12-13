@@ -1,0 +1,27 @@
+<li class="media list-group-item">
+  <div class="row">
+    <div class="col-3 border-right" [routerLink]="'tour-short-info/'+ _tour._id" >
+      <img src="{{_tour.imageUrl[0]}}"
+           class="mr-3 rounded-circle" width="200px" height="200px">
+    </div>
+    <div class="col-9">
+
+      <h4>{{_tour.country | uppercase}} {{_tour.name | uppercase}}
+              <div class="float-right">
+             <small>    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>
+              </div>
+      </h4>
+      <p>{{_tour.description}}
+      </p>
+      <b>Łączny koszt: <h3 >{{ (_reservation?.places ? _reservation?.places * _tour.price: 0)  | currency:'PLN'}}</h3> </b>
+      <div class="float-right">
+        <button type="button" [ngClass] = "placesClass" >Miejsc: {{_reservation.places}}</button>
+        <button type="button"  [ngClass] = "reservationClass" [routerLink]="'/tour-short-info/'+ _tour._id">Zmień ilość</button>
+        <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="removeReservation()">Zrezygnuj</button>
+        <button type="button"  class="btn btn-primary" [routerLink]="'/tour-short-info/'+ _tour._id">Szczegóły</button>
+      </div>
+
+    </div>
+  </div>
+
+</li>

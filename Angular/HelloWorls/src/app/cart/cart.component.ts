@@ -12,7 +12,7 @@ import {__await} from "tslib";
 export class CartComponent implements OnInit {
 
   reservations:Reservation[]=[];
-  tours:Tour[]=[];
+  tours:{tour:Tour,reservation:Reservation}[] = [];
   cost = 0;
 
   constructor(private tourService:TourService,private reservationService:ReservationService) { }
@@ -25,15 +25,10 @@ export class CartComponent implements OnInit {
   async fetchReservation() {
     this.reservations = await this.reservationService.getUserReservations(localStorage.getItem("user_id")).toPromise()
     this.reservations.forEach(r=>{
-      this.tourService.getTour(r._id)
-        .subscribe(t=>this.tours.push(t))
+      this.tourService.getTour(r.tourId)
+        .subscribe(t=>this.tours.push({tour:t,reservation:r}))
     })
     this.cost = this.reservations.reduce((pv, cv)=>cv.cost+cv.cost,0)
   }
 
-
-  //TODO
-  deleteTour(tour: number) {
-
-  }
 }

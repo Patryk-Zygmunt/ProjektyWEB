@@ -6,10 +6,35 @@ var cors = require('cors')
 const bodyParser = require("body-parser");
 var express = require('express');
 var service = require('./service');
+var authService = require('./auth');
 var app = express();
+
 app.use(cors())
 
 app.use(bodyParser.json());
+app.use(authService.jwt());
+
+
+
+app.post('/auth', (req, res)=> {
+    authService.authenticate(req.body)
+        .then(user => user ? res.json(user) : res.status(400))
+})
+
+app.post('/users',async (req, res)=> {
+    let r = await authService.getAll();
+    res.send(r)
+})
+
+app.post('/signup', (req, res)=> {
+    authService.signup(req.body)
+        .then(user => res.json(user))
+})
+
+
+
+
+
 
 app.get('/tour/all', (req, res) =>{
     service.getTours(res);
@@ -37,7 +62,7 @@ app.put('/tour/:id', (req, res) =>{
 
 
 app.get('/reservation/all', (req, res) =>{
-    service.getReservations(res);
+    service.getReservations({},res);
 })
 
 
@@ -46,7 +71,7 @@ app.get('/reservation/:id', (req, res) =>{
 })
 
 app.get('/reservation/user/:user', (req, res) =>{
-    service.getReservation({user:req.params.user}, res);
+    service.getReservations({user:req.params.user}, res);
 })
 
 app.get('/reservation/user/:user/tour/:tourId', (req, res) =>{

@@ -38,12 +38,13 @@ import { AdminListComponent } from './tour-list/admin-list/admin-list.component'
 import { ClientListComponent } from './tour-list/client-list/client-list.component';
 import { AdminTourComponent } from './tours/admin-tour/admin-tour.component';
 import {EditTourComponent} from "./edit-tour/edit-tour.component";
+import { CartTourComponent } from './tours/cart-tour/cart-tour.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TourShortInfoComponent,
-    TourListComponent,
     InformationComponent,
     NewTourComponent,
     CartComponent,
@@ -62,6 +63,8 @@ import {EditTourComponent} from "./edit-tour/edit-tour.component";
     AdminTourComponent,
     EditTourComponent,
     AuthComponent,
+    CartTourComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

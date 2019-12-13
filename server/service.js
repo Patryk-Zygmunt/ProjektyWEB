@@ -49,7 +49,7 @@ exports.updateTour = (body,id, res)=> {
 
 
 
-exports.getReservations = (res) => {
+exports.getReservations = (filter,res) => {
     model.reservation.find((err,result)=>{
         res.send(result)
     })
@@ -57,7 +57,7 @@ exports.getReservations = (res) => {
 
 
 exports.getReservation = (filter, res)=> {
-    model.reservation.find(filter,(err,result)=>{
+    model.reservation.findOne(filter,(err,result)=>{
         res.send(result)
     })
 }

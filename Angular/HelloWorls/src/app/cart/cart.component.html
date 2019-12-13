@@ -7,8 +7,8 @@
     </div>
     </div>
 
-  <ul class="list-group" *ngFor="let t of reservations">
-<app-tour [tour]="tours"  (toDelete)="deleteTour($event)" ></app-tour>
+  <ul class="list-group" *ngFor="let tr of tours">
+<app-cart-tour [tour]="tr.tour" [reservation]="tr.reservation" (toUpdate)="fetchReservation()" ></app-cart-tour>
   </ul>
 </div>
 </div>
