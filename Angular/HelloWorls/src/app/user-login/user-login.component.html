@@ -1,0 +1,29 @@
+<div class="signup-form">
+  <form class="form-horizontal">
+    <div class="col-xs-8 col-xs-offset-4">
+      <h2>Logowanie</h2>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Login</label>
+      <div class="col-xs-8">
+        <input type="text" [(ngModel)] = "login" name="login"  class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-xs-4">Hasło</label>
+      <div class="col-xs-8">
+        <input type="password" [(ngModel)] = "password" name="password" class="form-control">
+      </div>
+      <div class="help-block m-1" *ngIf="logEr">
+        <small style="color: #df4930">Błędny login lub hasło</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-8 col-xs-offset-4">
+        <button type="submit"  (click) = "loginUser()" class="btn btn-success btn-lg">Zaloguj się</button>
+      </div>
+    </div>
+  </form>
+  <div class="text-center"> Nie masz jeszcze konta? <a routerLink="/signup" routerLinkActive="active">Kliknij tutaj</a></div>
+</div>

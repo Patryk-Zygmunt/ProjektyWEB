@@ -18,10 +18,10 @@ app.use(authService.jwt());
 
 app.post('/auth', (req, res)=> {
     authService.authenticate(req.body)
-        .then(user => user ? res.json(user) : res.status(400))
+        .then(user => user ? res.json(user) : res.status(400).send())
 })
 
-app.post('/users',async (req, res)=> {
+app.get('/users',async (req, res)=> {
     let r = await authService.getAll();
     res.send(r)
 })

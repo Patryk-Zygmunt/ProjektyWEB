@@ -1,0 +1,65 @@
+<div class="signup-form">
+  <form class="form-horizontal" [formGroup]="signForm"  (ngSubmit)="signup()">
+    <div class="col-xs-8 col-xs-offset-4">
+      <h2>Stwórz konto</h2>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Nick(min 3 znaki)*</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" name="login" formControlName="login">
+        <div *ngIf="signForm.get('login').touched && signForm.get('login').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="signForm.get('login').touched && signForm.get('login').errors?.minlength" class="help-block m-1">
+          <small style="color: #df4930">Pole musi być dłuższe niż 3 znaki</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Email*</label>
+      <div class="col-xs-8">
+        <input type="email" class="form-control" name="email" formControlName="email">
+        <div *ngIf="signForm.get('email').touched && signForm.get('email').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="signForm.get('email').touched && signForm.get('email').errors?.email" class="help-block m-1">
+          <small style="color: #df4930">Pole musi być emailem</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Hasło(min 3 znaki)*</label>
+      <div class="col-xs-8">
+        <input type="password" class="form-control" name="password" formControlName="password" required="required">
+        <div *ngIf="signForm.get('password').touched && signForm.get('password').errors?.required" class="help-block m-1" >
+          <small style="color: #df4930">Pole jest wymagane</small>
+        </div>
+
+        <div *ngIf="signForm.get('password').touched && signForm.get('password').errors?.minlength" class="help-block m-1">
+          <small style="color: #df4930">Pole musi być dłuższe niż 3 znaki</small>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-xs-4">Potwierdź Hasło*</label>
+      <div class="col-xs-8">
+        <input type="password" class="form-control" formControlName="confirmPassword" name="confirmPassword" >
+      </div>
+      <div class="help-block m-1" *ngIf="signForm.get('confirmPassword').touched && signForm.get('confirmPassword').value!=signForm.get('password').value">
+        <small style="color: #df4930">Hasła różnią się</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-8 col-xs-offset-4">
+        <button type="submit" [disabled]="!signForm.valid" class="btn btn-primary btn-lg">Stwórz konto</button>
+        </div>
+<!--        <div class="help-block m-1" *ngIf="logEr">-->
+<!--          <small style="color: #df4930">Użytkownik o podanym loginie juz istnieje</small>-->
+<!--        </div>-->
+      </div>
+  
+  </form>
+  <div class="text-center">Masz już konto? <a routerLink="/login" routerLinkActive="active">Zaloguj</a></div>
+</div>

@@ -26,8 +26,14 @@ let Reservation = new mongoose.Schema({
     cost:Number
   })
 
+let User = new mongoose.Schema({
+login:String,
+    password:String,
+    role:String
+})
 
 exports.tour = mongoose.model('tour', Tour)
+exports.user = mongoose.model('user', User)
 exports.reservation = mongoose.model('reservation', Reservation)
 
 

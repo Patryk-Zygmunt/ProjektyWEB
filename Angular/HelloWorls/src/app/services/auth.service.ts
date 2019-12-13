@@ -1,28 +1,47 @@
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User } from 'firebase';
-import { Observable } from 'rxjs/index';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Injectable} from "@angular/core";
-import {Credentials} from "../model/user";
+import {User} from "../model/user";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
+import {log} from "util";
+import {map} from "rxjs/operators";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  readonly authState$: Observable<User | null> = this.fireAuth.authState;
 
-  constructor(private fireAuth: AngularFireAuth) {}
 
-  get user(): User | null {
-    return this.fireAuth.auth.currentUser;
+  private readonly URL = environment.server_url
+  userSource = new Subject<User>();
+  user$ = this.userSource.asObservable();
+
+  constructor(private http:HttpClient) {}
+
+
+ auth(login, password):Observable<User|null>{
+    return this.login(login,password)
+      .pipe(
+        map(u=>{
+
+          console.log(u)
+        localStorage.setItem("token",u.token)
+        localStorage.setItem("user_id",u._doc._id)
+        localStorage.setItem("role",u._doc.role)
+        this.userSource.next(u._doc)
+        return u._doc;
+      }))
+ }
+
+ login(login, password):Observable<any> {
+    return this.http.post<any>(this.URL+ 'auth',{login:login, password:password})
   }
 
-  login({email, password}: Credentials) {
-    return this.fireAuth.auth.signInWithEmailAndPassword(email, password);
-  }
-
-  register({email, password}: Credentials) {
-    return this.fireAuth.auth.createUserWithEmailAndPassword(email, password);
+  register(user) {
+    return this.http.post(this.URL+ 'signup',user)
   }
 
   logout() {
-    return this.fireAuth.auth.signOut();
+    localStorage.clear();
+    this.userSource.next(null)
   }
 }

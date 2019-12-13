@@ -10,7 +10,7 @@ import { InformationComponent } from './information/information.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import { NewTourComponent } from './new-tour/new-tour.component';
 import { CartComponent } from './cart/cart.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { TourDateComponent } from './tour-date/tour-date.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DbService} from "./services/db.service";
@@ -40,6 +40,9 @@ import { AdminTourComponent } from './tours/admin-tour/admin-tour.component';
 import {EditTourComponent} from "./edit-tour/edit-tour.component";
 import { CartTourComponent } from './tours/cart-tour/cart-tour.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import {UserRegisterComponent} from "./user-register/user-register.component";
+import {UserLoginComponent} from "./user-login/user-login.component";
+import {TokenInterceptorService} from "./services/token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     AuthComponent,
     CartTourComponent,
     NavbarComponent,
+    UserRegisterComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -75,12 +80,15 @@ import { NavbarComponent } from './navbar/navbar.component';
     Ng5SliderModule,
     AngularMultiSelectModule,
     GalleryModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
 
     AppRoutingModule
   ],
-  providers: [PricePipe, DatePipe, RatePipe, CountryPipe],
+  providers: [PricePipe, DatePipe, RatePipe, CountryPipe,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
