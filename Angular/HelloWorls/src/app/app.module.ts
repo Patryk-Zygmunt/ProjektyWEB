@@ -43,6 +43,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {UserRegisterComponent} from "./user-register/user-register.component";
 import {UserLoginComponent} from "./user-login/user-login.component";
 import {TokenInterceptorService} from "./services/token-interceptor.service";
+import { NamePipePipe } from './pipes/name-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import {TokenInterceptorService} from "./services/token-interceptor.service";
     CartTourComponent,
     NavbarComponent,
     UserRegisterComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    NamePipePipe
   ],
   imports: [
     BrowserModule,
@@ -83,7 +85,7 @@ import {TokenInterceptorService} from "./services/token-interceptor.service";
 
     AppRoutingModule
   ],
-  providers: [PricePipe, DatePipe, RatePipe, CountryPipe,
+  providers: [PricePipe, DatePipe, RatePipe, CountryPipe,NamePipePipe,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

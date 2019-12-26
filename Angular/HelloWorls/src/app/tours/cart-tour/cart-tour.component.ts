@@ -17,6 +17,8 @@ export class CartTourComponent  extends TourBaseComponent implements OnInit {
   constructor(public tourService: TourService, config: NgbRatingConfig, public reservationService: ReservationService,public route: ActivatedRoute)
   {
     super(tourService,config,reservationService);
+    config.readonly = true;
+
   }
 
   ngOnInit() {
@@ -26,6 +28,7 @@ export class CartTourComponent  extends TourBaseComponent implements OnInit {
 @Input('tour')
 public set tour(t: Tour) {
     this._tour  = t;
+    this.checkRate();
   }
 
   @Input('reservation')

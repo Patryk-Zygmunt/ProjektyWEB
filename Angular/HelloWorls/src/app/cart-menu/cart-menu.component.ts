@@ -9,19 +9,15 @@ import {ReservationService} from "../services/reservation.service";
 })
 export class CartMenuComponent implements OnInit {
 
-
-  cost:number;
-  amount:number
+  cost:number=0;
+  amount:number=0;
   constructor(private reservationService:ReservationService) { }
 
   ngOnInit() {
+    this.reservationService.reservationValue.subscribe(v=>this.cost = v)
+    this.reservationService.reservationAmount.subscribe(v=>this.amount = v)
     this.reservationService.getUserReservations(localStorage.getItem('user_id')).subscribe(res=>{
-      this.cost = res.reduce((pv, cv)=>cv.cost+cv.cost,0)
-      this.amount = res.reduce((pv, cv)=>cv.places+cv.places,0)
-      this.reservationService.reservationAmountSource.next(this.amount)
-      this.reservationService.reservationValueSource.next( this.cost)
-      this.reservationService.reservationValue.subscribe(v=>this.cost = v)
-      this.reservationService.reservationAmount.subscribe(v=>this.amount = v)
+
     })
 
   }

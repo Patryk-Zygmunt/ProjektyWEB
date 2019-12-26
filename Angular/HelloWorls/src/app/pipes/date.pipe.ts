@@ -7,7 +7,6 @@ import {DateFilter, PriceFilter} from "../model/pipes/pipe-filter";
 })
 export class DatePipe implements PipeTransform {
 
-  //TODO
   transform(value: any, f:DateFilter): any {
     return value.filter(v=>new Date(v.tour.start).getDate() >= f.values.min.getDate() && new Date(v.tour.start).getDate() <= f.values.max.getDate())
   }

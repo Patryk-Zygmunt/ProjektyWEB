@@ -11,6 +11,7 @@ import {TourService} from "../../services/tour.service";
 export class ClientListComponent extends TourListComponent implements OnInit {
 
   reservation: number;
+  isCollapsed: boolean;
 
   constructor(public tourService: TourService,private reservationService:ReservationService) {
     super(tourService);

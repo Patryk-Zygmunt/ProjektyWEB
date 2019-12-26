@@ -15,6 +15,8 @@ export class AdminTourComponent extends TourBaseComponent implements OnInit {
   constructor(public tourService: TourService, config: NgbRatingConfig, public reservationService: ReservationService,private  modalService: NgbModal)
   {
     super(tourService,config,reservationService);
+    config.readonly = true;
+
   }
 
   ngOnInit() {

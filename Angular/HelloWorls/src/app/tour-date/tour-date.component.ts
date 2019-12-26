@@ -16,6 +16,7 @@ export class TourDateComponent {
 
   fromDate: NgbDate;
   toDate: NgbDate;
+  disabled: true;
 
   constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
     this.fromDate = calendar.getToday();

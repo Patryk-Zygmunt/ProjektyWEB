@@ -13,7 +13,7 @@ export class UserAuthGuard implements CanActivate  {
     if (localStorage.getItem("token")) {
       return true;
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']).then(()=>{});
       return false;
     }
   }

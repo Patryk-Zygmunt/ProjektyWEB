@@ -28,10 +28,12 @@
       <input #dpFromDate
              class="form-control" placeholder="yyyy-mm-dd"
              name="dpFromDate"
+
              [value]="formatter.format(fromDate)"
              (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+        <button class="btn btn-primary calendar"              [disabled]="disabled"
+                (click)="datepicker.toggle()" type="button"> <i style="color:white" class="fas fa-calendar-alt"></i></button>
       </div>
     </div>
   </div>
@@ -40,10 +42,12 @@
       <input #dpToDate
              class="form-control" placeholder="yyyy-mm-dd"
              name="dpToDate"
+
              [value]="formatter.format(toDate)"
              (input)="toDate = validateInput(toDate, dpToDate.value)">
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary calendar" (click)="datepicker.toggle()" type="button"></button>
+        <button              [disabled]="disabled"
+                             class="btn btn-primary calendar" (click)="datepicker.toggle()" type="button"><i style="color:white" class="fas fa-calendar-alt"></i></button>
       </div>
     </div>
   </div>

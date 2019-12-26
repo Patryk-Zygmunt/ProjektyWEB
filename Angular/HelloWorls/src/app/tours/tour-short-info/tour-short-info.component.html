@@ -1,16 +1,14 @@
 <li class="media list-group-item">
   <div class="row">
-    <div class="col-3 border-right" [routerLink]="'tour-short-info/'+ _tour._id" >
+    <div class=" d-none d-lg-block col-3 border-right" [routerLink]="'tour-short-info/'+ _tour._id" >
       <img src="{{_tour.imageUrl[0]}}"
            class="mr-3 rounded-circle" width="200px" height="200px">
     </div>
     <div class="col-9">
 
       <h4>{{_tour.country | uppercase}} {{_tour.name | uppercase}}
-<!--        <div class="float-right">
-&lt;!&ndash;          <small>    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>&ndash;&gt;
-&lt;!&ndash;&lt;!&ndash;          <app-tour-short-info-date (tourDate)="dateChoosen($event)"></app-tour-short-info-date>&ndash;&gt;&ndash;&gt;
-&lt;!&ndash;        </div> -->
+ <small class="float-right">    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>
+
  </h4>
       <p>{{_tour.description}}
        <b>Ocena:</b><ngb-rating [(rate)]="_userRate" (hover)="hoveredRate=$event" (leave)="hoveredRate=0" ></ngb-rating> {{_tour.rate}}/5

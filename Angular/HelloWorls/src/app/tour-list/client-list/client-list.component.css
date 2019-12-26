@@ -5,3 +5,40 @@ h1, h4 {
 .btn{
   width:100%;
 }
+
+#collapseButton {
+  display: none;
+}
+
+.options {
+  z-index: 1000;
+
+
+}
+
+
+@media (max-width: 767.98px) {
+  #collapseButton {
+    display: block;
+    position: absolute;
+    z-index: 1001;
+  }
+  #collapseButton button {
+    font-size: large;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-left: auto;
+  }
+  .options {
+    position: absolute;
+    z-index: 1000;
+    height: 800px;
+    max-width: 240px;
+    margin-left: 0 !important;
+    right: 2px !important;
+    left: auto !important;
+  }
+  .options #mapOptions .collapse {
+    display: none;
+  }
+}

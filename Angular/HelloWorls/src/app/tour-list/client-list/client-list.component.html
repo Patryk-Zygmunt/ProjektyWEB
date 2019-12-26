@@ -1,26 +1,34 @@
 <div class="container-fluid">
   <div class="row">
 
-    <div class="col-3" >
+    <div   [ngbCollapse]="isCollapsed" id="mapOptions" class="col-md-3 options">
       <app-filter (filters)="filter($event)"  [tours]="_tours"></app-filter>
+      <button id="collapseButton" type="button" class="btn btn-outline-success"  (click)="isCollapsed = !isCollapsed"
+              [attr.aria-expanded]="!isCollapsed" aria-controls="mapOptions">
+        {{isCollapsed ? 'Opcje' :'>>>' }}
+
+      </button>
     </div>
 
-    <div class="col-9" >
+    <div class="col-md-9" >
 
       <div class="row">
-        <div class="row" style="width:100%">
-          <div class="col-4 p-0" >
-          </div>
-          <div class="col-4 p-0">
-          </div>
-          <div class="col-4 p-0">
-          </div>
-        </div>
-        <ul class="list-group" *ngFor="let t of ( toursWithStyle | dynamicFilter:filters)">
+
+        <ul class="list-group" *ngFor="let t of ( toursWithStyle | dynamicFilter:filters) | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
           <app-tour [tour]="t.tour" [style]="t.priceStyle" (toUpdate)="updateTours()"></app-tour>
         </ul>
       </div>
-      <app-information></app-information>
+
+
+
+      <div class="row w-100 d-flex justify-content-center">
+
+      <ngb-pagination
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="_tours.length"></ngb-pagination>
+
+      </div>
     </div>
   </div>
 </div>

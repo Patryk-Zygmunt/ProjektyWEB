@@ -20,16 +20,16 @@ export class AuthService {
 
  auth(login, password):Observable<User|null>{
     return this.login(login,password)
-      .pipe(
-        map(u=>{
+          .pipe(
+            map(u=>{
 
-          console.log(u)
-        localStorage.setItem("token",u.token)
-        localStorage.setItem("user_id",u._doc._id)
-        localStorage.setItem("role",u._doc.role)
-        this.userSource.next(u._doc)
-        return u._doc;
-      }))
+              console.log(u)
+            localStorage.setItem("token",u.token)
+            localStorage.setItem("user_id",u._doc._id)
+            localStorage.setItem("role",u._doc.role)
+            this.userSource.next(u._doc)
+            return u._doc;
+          }))
  }
 
  login(login, password):Observable<any> {

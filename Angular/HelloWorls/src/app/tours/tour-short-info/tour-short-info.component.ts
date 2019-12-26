@@ -15,6 +15,8 @@ export class TourShortInfoComponent extends TourBaseComponent implements OnInit 
   constructor(public tourService: TourService, config: NgbRatingConfig, public reservationService: ReservationService,public route: ActivatedRoute)
   {
     super(tourService,config,reservationService);
+    config.readonly = true;
+
   }
 
   ngOnInit() {

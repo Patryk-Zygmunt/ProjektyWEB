@@ -11,6 +11,7 @@ interface Tour {
   rate:number,
   rateAmount:number,
   end:Date,
+  usersRates:[{user:string,rate:number}],
   comments:{text:string,date:Date,user?:string}[]
 }
 

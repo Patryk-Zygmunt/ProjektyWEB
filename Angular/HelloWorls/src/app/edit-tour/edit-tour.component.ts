@@ -29,7 +29,7 @@ export class EditTourComponent implements OnInit {
       name: [this.tour.name, [ Validators.required, Validators.minLength(3)]],
       country: [this.tour.country, [ Validators.required, Validators.minLength(3)]],
       description: [this.tour.description, [ Validators.required, Validators.minLength(10)]],
-      price: [this.tour.price, [ Validators.required, Validators.min(0)]], //TODO fix nie działa min
+      price: [this.tour.price, [ Validators.required, Validators.min(0)]],
       maxPlaces: [this.tour.maxPlaces, [ Validators.required, Validators.min(0)]]
     })
 

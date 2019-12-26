@@ -1,0 +1,11 @@
+.multiselect{
+  width: 90%;
+  border-color: black;
+
+}
+
+/deep/
+app-tour-date .ml-2{
+  margin-left: 0 !important;
+  margin-top: 0.5rem;
+}

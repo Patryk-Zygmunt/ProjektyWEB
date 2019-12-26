@@ -32,7 +32,11 @@ app.post('/signup', (req, res)=> {
 })
 
 
+app.delete('/all', (req, res) =>{
+    service.deleteReservations(res);
+    service.deleteTours(res);
 
+})
 
 
 

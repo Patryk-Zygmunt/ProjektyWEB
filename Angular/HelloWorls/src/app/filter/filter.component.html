@@ -1,15 +1,15 @@
-<div class="signup-form">
-
+<div class="container-fluid signup-form" style="background-color: white;min-width: 240px;max-width: 240px;">
+    <div class="row w-100">
     <div class="form-group">
-      <label class="control-label col-xs-4">Nazwa</label>
-      <div class="col-xs-8">
-        <input type="text" class="form-control" name="name"  >
-      </div>
+      <label for="typeahead-basic">Nazwa wycieczki</label>
+      <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="selectedName" [ngbTypeahead]="searchName">
+      {{selectedName}}
+    </div>
     </div>
 
-    <div class="form-group">
-      <label class="control-label col-xs-4">Kraj</label>
-      <div class="col-xs-8">
+  <div class="row w-100 form-group ">
+      <label class="control-label">Kraj</label>
+      <div class="multiselect">
         <angular2-multiselect [data]="countryList"
                               [(ngModel)]="selectedTmpC"
                               [settings]="settings"
@@ -19,12 +19,15 @@
 >
         </angular2-multiselect>
       </div>
-    </div>
 
-    <div class="form-group">
+  </div>
+    <div class="row form-group" style="max-width: 210px">
+
       <label class="control-label col-xs-4">Cena</label>
       <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (mouseup)="filterPrice()"> ></ng5-slider>
+
     </div>
+  <div class="row w-100 mb-2">
 
   <angular2-multiselect [data]="ratesList"
                         [(ngModel)]="selectedTmpR"
@@ -34,12 +37,14 @@
                         (onDeSelectAll)="OnRateDeSelectAll($event)"
   >
   </angular2-multiselect>
-
-
-    <app-tour-date (tourDate)="dateChoosen($event)"></app-tour-date>
-    <div class="form-group">
-      <div class="col-xs-8 col-xs-offset-4">
-        <button  class="btn btn-primary btn-lg" (click)="filter()">Filtruj</button>
-      </div>
+  </div>
+    <div class="row w-80">
+      <app-tour-date (tourDate)="dateChoosen($event)"></app-tour-date>
     </div>
+  <div class="row w-60 form-group justify-content-end pt-2">
+
+        <button  class="btn btn-info" (click)="filter()">Filtruj</button>
+
+    </div>
+
 </div>

@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Options} from "ng5-slider";
-import {CountryFilter, DateFilter, PipeFilter, PriceFilter, RateFilter} from "../model/pipes/pipe-filter";
+import {CountryFilter, DateFilter, NameFilter, PipeFilter, PriceFilter, RateFilter} from "../model/pipes/pipe-filter";
+import {Observable} from "rxjs";
+import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-filter',
@@ -9,7 +11,7 @@ import {CountryFilter, DateFilter, PipeFilter, PriceFilter, RateFilter} from "..
 })
 export class FilterComponent implements OnInit {
 
-
+//Todo wyglad n amaluym do porawy
 
   @Output()
   filters = new EventEmitter()
@@ -22,16 +24,26 @@ export class FilterComponent implements OnInit {
   maxValue: number = 6000;
   options: Options={};
   countryList = []
-  nameList = []
   selectedCountries:string[] = []
   selectedTmpC = []
   selectedTmpR = []
   ratesList = Array(5).fill(0).map((_,idx)=>{ return {id:idx,itemName:idx + 1}})
 selectedRates:number[] = []
 
+
+  searchName = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 1 ? []
+        : this._tours.filter(t => t.name.toLowerCase().indexOf(term.toLowerCase()) > -1)
+          .slice(0, 10).map(t=>t.name))
+    )
+
   @Input()
   set tours(tour:Tour[]){
-      let sorted   = tour.sort((a, b)=>a.price - b.price).map(v=>v.price)
+    this._tours = tour;
+    let sorted   = tour.sort((a, b)=>a.price - b.price).map(v=>v.price)
     let floor = sorted[0]  ? sorted[0] : 0
     let ceil = sorted[sorted.length-1]  ? sorted[sorted.length-1] : 10000
     this.options = {
@@ -48,8 +60,9 @@ selectedRates:number[] = []
   settings = {
     text: "Wybierz",
     enableCheckAll: false,
-    classes: "custom-class"
+    classes: "multiselect"
   };
+  selectedName: string="";
 
 
   constructor() { }
@@ -69,6 +82,12 @@ selectedRates:number[] = []
 
 
   filter(){
+    if (this.selectedName) {
+      this.filterMap.set(NameFilter.type, new NameFilter(this.selectedName))
+    }
+    else if (this.filterMap.get(NameFilter.type)) {
+      this.filterMap.delete(NameFilter.type)
+    }
     this.filters.emit(Array.from(this.filterMap.values()))
   }
 

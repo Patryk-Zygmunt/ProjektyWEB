@@ -19,6 +19,10 @@ exports.getTour = (id, res)=> {
 
 exports.addTour = (body, res)=> {
     console.log(body)
+    body.places = body.maxPlaces
+    body.rate = 0
+    body.rateAmount = 0
+    bodu.usersRates = []
     model.tour.create(body,(err,result)=>{
         res.send(result)
     })
@@ -81,7 +85,6 @@ exports.deleteReservation = (id, res)=> {
 exports.deleteReservations = (id, res)=> {
     console.log(id)
     model.reservation.deleteMany({},(err,result)=>{
-        res.send(result)
     })
 }
 

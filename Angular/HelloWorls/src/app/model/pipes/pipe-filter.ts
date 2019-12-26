@@ -71,23 +71,45 @@ export class RateFilter implements PipeFilter{
   }
 }
 
-export class CountryFilter implements PipeFilter{
+export class CountryFilter implements PipeFilter {
 
-  private _values:string[];
+  private _values: string[];
 
 
   constructor(values: string[]) {
     this._values = values;
   }
 
-  public  static readonly  type = 'place';
-  public   readonly  type = 'place';
+  public static readonly type = 'place';
+  public readonly type = 'place';
 
   get values(): string[] {
     return this._values;
   }
 
   set values(value: string[]) {
+    this._values = value;
+  }
+}
+
+
+  export class NameFilter implements PipeFilter{
+
+  private _values:string;
+
+
+  constructor(values: string) {
+    this._values = values;
+  }
+
+  public  static readonly  type = 'name';
+  public   readonly  type = 'name';
+
+  get values(): string {
+    return this._values;
+  }
+
+  set values(value: string) {
     this._values = value;
   }
 }

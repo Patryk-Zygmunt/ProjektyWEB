@@ -11,6 +11,8 @@ export class TourListComponent{
   _toursWithStyle :{tour:Tour, priceStyle:string}[] = [];
   _tours:Tour[]=[];
   filters=[];
+  page=1;
+  readonly pageSize=5;
 
   constructor(public tourService: TourService) {
     this.updateTours()

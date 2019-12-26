@@ -1,9 +1,10 @@
 import {Injector, Pipe, PipeTransform} from '@angular/core';
 import {PricePipe} from "./price.pipe";
 import {DatePipe} from "./date.pipe";
-import {CountryFilter, DateFilter, PipeFilter, PriceFilter, RateFilter} from "../model/pipes/pipe-filter";
+import {CountryFilter, DateFilter, NameFilter, PipeFilter, PriceFilter, RateFilter} from "../model/pipes/pipe-filter";
 import {RatePipe} from "./rate.pipe";
 import {CountryPipe} from "./country.pipe";
+import {NamePipePipe} from "./name-pipe.pipe";
 
 @Pipe({
   name: 'dynamicFilter',
@@ -11,8 +12,10 @@ import {CountryPipe} from "./country.pipe";
 })
 export class DynamicPipe implements PipeTransform {
 
-  public constructor(private price:PricePipe,private date:DatePipe, private rate:RatePipe, private country:CountryPipe) {
-    this.pipes = [{type:PriceFilter.type,pipe:this.price},{type:DateFilter.type,pipe:this.date},{type:CountryFilter.type, pipe:this.country},{type:RateFilter.type,pipe:this.rate}]
+  public constructor(private price:PricePipe,private date:DatePipe, private rate:RatePipe, private country:CountryPipe,private name:NamePipePipe) {
+    this.pipes = [{type:PriceFilter.type,pipe:this.price},{type:DateFilter.type,pipe:this.date},
+      {type:CountryFilter.type, pipe:this.country},{type:RateFilter.type,pipe:this.rate},
+      {type:NameFilter.type,pipe:this.name}  ]
   }
 
   readonly pipes = [];

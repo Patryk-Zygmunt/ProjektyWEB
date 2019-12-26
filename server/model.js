@@ -12,6 +12,7 @@ let Tour = new mongoose.Schema({
     start:Date,
     rate:Number,
     rateAmount:Number,
+    usersRates:[{user:String,rate:Number}],
     end:Date,
     comments:[{text:String,date:Date,user:String}]
 })

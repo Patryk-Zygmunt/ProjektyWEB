@@ -24,19 +24,15 @@
 
 
       <div class="row">
-        <div class="row" style="width:100%">
-          <div class="col-4 p-0" >
-            <button class="btn btn-success" (click)="open(content)" >Dodaj wycieczkę</button>
-          </div>
-          <div class="col-4 p-0">
-          </div>
-          <div class="col-4 p-0">
-            <app-cart-menu></app-cart-menu>
-          </div>
-        </div>
+
         <ul class="list-group" *ngFor="let t of ( toursWithStyle | dynamicFilter:filters)">
           <app-admin-tour [tour]="t.tour"  (toDelete)="deleteTour($event)" (toUpdate)="updateTours()"></app-admin-tour>
         </ul>
+        <div class="row" style="width:100%">
+          <div class="col-4 offset-8 p-1" >
+            <button class="btn btn-success" (click)="open(content)" >Dodaj wycieczkę</button>
+          </div>
+        </div>
       </div>
 
       <app-information></app-information>

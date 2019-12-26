@@ -29,9 +29,7 @@ export class TourInfoComponent extends TourShortInfoComponent implements OnInit 
     let id = this.route.snapshot.paramMap.get('_id');
     this._reservation = await this.reservationService.getUserTourReservation(localStorage.getItem("user_id"), id).toPromise()
     console.log(this._reservation)
-    this.tour = await this.tourService.getTour(id).toPromise()
-    console.log(this._tour)
-    console.log("sdsdsdsds")
+    this.tour= await this.tourService.getTour(id).toPromise()
     this.tourForm = this.formBuilder.group({
       places: [this._reservation ? this._reservation.places : 0, [Validators.required, Validators.min(1), Validators.max(this._tour.places)]]
     })
@@ -41,11 +39,11 @@ export class TourInfoComponent extends TourShortInfoComponent implements OnInit 
 
   set tour(t:Tour){
     this._tour = t;
+    this.checkRate();
     this.images = t.imageUrl.map((img,idx)=>new Image(idx, {
       img: img,
     }))
   }
-
 
 
   plainGalleryRow: PlainGalleryConfig = {

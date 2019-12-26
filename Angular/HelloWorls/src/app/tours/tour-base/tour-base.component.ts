@@ -15,6 +15,7 @@ export class TourBaseComponent {
   _tour: Tour;
   _userRate = 0;
   _reservation:Reservation;
+  isRate = false;
 
 
   placesClass = ['btn', 'btn-info'];
@@ -25,8 +26,10 @@ export class TourBaseComponent {
   @Output()
   toUpdate = new EventEmitter<string>();
 
+  public set tour(tour){
+    this._tour = tour
+  }
 
-  //TODO refactor
    public makeReservation(p: number) {
    if(this._reservation) this.updateReservation(p)
     else this.addReservation(p)
@@ -35,14 +38,13 @@ export class TourBaseComponent {
   public addReservation(p: number) {
     let reservation: Reservation = {
       cost: p * this._tour.price,
-      end: undefined,
+      end: this._tour.end,
       places: p,
-      start: undefined,
+      start: this._tour.start,
       tourId:this._tour._id,
       user: localStorage.getItem("user_id")
     } as Reservation
     this.reservationService.addReservation(reservation).subscribe((res:any) => {
-      this.reservationService.changeReservation(p, p * this._tour.price);
       this._tour.places -= p;
       this.reservationService.getReservation(res._id)
         .subscribe(v=> this._reservation = v)
@@ -58,11 +60,11 @@ export class TourBaseComponent {
       places:p,
       _id:this._reservation._id
     } as Reservation
-    this.reservationService.updateReservation(reservation).subscribe(() => {
+    this.reservationService.updateReservation(reservation,p - this._reservation.places,this._tour.price).subscribe(() => {
       let  places =  p > this._reservation.places ? p - this._reservation.places : 0;
-      this.reservationService.changeReservation(places , places * this._tour.price);
       this.reservationService.getReservation(this._reservation._id)
         .subscribe(v=> this._reservation = v)
+      this._tour.places -= p - this._reservation.places;
       this.placesAmountChanged(this._tour.places, this._tour.maxPlaces);
       this.tourService.updateTour(this._tour).subscribe(() => this.toUpdate.next(this._tour._id));
     })
@@ -71,14 +73,27 @@ export class TourBaseComponent {
 
   public set userRate(rate: number) {
     if (!rate) { return; }
+    let diffAmount = this._tour.rateAmount + 1;
+    if(this.isRate){
+      diffAmount-=1;
+      this._tour.rate = ((diffAmount - 1) * this._tour.rate - this._userRate) / diffAmount;
+      let idx = this._tour.usersRates.findIndex(r=>r.user == localStorage.getItem("user_id"))
+      this._tour.usersRates.splice(idx,1);
+    }
+    this._tour.rate = ((diffAmount - 1) * this._tour.rate + rate) / diffAmount;
     this._userRate = rate;
-    this._tour.rateAmount += 1;
-    this._tour.rate = ((this._tour.rateAmount - 1) * this._tour.rate + rate) / this._tour.rateAmount;
+    this._tour.rateAmount = diffAmount
+    this._tour.usersRates.push({user:localStorage.getItem("user_id"),rate:rate})
+    this.tourService.updateTour(this._tour).subscribe(async () => this.tour = await this.tourService.getTour(this._tour._id).toPromise());
 
   }
 
+  public get userRate(){
+     return this._userRate
+  }
+
   removeReservation() {
-      this.reservationService.deleteReservation(this._reservation._id)
+      this.reservationService.deleteReservation(this._reservation)
         .subscribe(()=> {
           this.toUpdate.next(this._reservation._id)
           this._tour.places += this._reservation.places;
@@ -86,6 +101,12 @@ export class TourBaseComponent {
           this.tourService.updateTour(this._tour).subscribe(()=>  {});
 
         })
+  }
+
+  public checkRate(){
+     let userRate = this._tour.usersRates.find(r=>r.user == localStorage.getItem("user_id"))
+     this._userRate = userRate ? userRate.rate : 0;
+     this.isRate = !!userRate
   }
 
 

@@ -1,32 +1,32 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" [routerLink]="'/'"><i class="fas fa-snowman"></i> Itaka</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="'/signup'">Rejestracja <span class="sr-only">(current)</span></a>
+      <li *ngIf="!user" class="nav-item ">
+        <a class="nav-link" [routerLink]="'/signup'">Rejestracja </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="'/signup'">Login</a>
+      <li *ngIf="user" class="nav-item active">
+        <a class="nav-link" >Witaj {{user.login}} </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <li *ngIf="!user" class="nav-item">
+        <a class="nav-link" [routerLink]="'/login'">Login</a>
       </li>
 
     </ul>
-    <div class="my-2 my-lg-0">
-      <app-cart-menu></app-cart-menu>
+    <div  class="my-2 my-lg-0">
+      <div class="row">
+      <app-cart-menu *ngIf="user?.role=='USER'"></app-cart-menu>
+
+        <button *ngIf="user?.role=='ADMIN'" class="btn btn-info "  style="margin-left: 10px" [routerLink]="'/panel'">
+          panel</button>
+
+      <button *ngIf="user"   class="btn btn-info "  style="margin-left: 10px" (click)="auth.logout();router.navigate(['/login']);
+"><i class="fas fa-sign-out-alt"></i></button>
+      </div>
     </div>
   </div>
 </nav>

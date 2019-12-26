@@ -11,22 +11,22 @@
     <div class="col-9">
 
       <h3>{{_tour.country | uppercase}} {{_tour.name | uppercase}}
-        <div class="float-right">
-<!--          <small>    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>-->
-          <!--          <app-tour-short-info-date (tourDate)="dateChoosen($event)"></app-tour-short-info-date>-->
-        </div>
+        <small class="float-right">    Data: <b class="text-primary"> {{_tour.start | date:'shortDate'}} </b> do <b class="text-primary">{{_tour.end |date:'shortDate'}}</b> </small>
+
       </h3>
       <p>{{_tour.description}}
-        <b>Ocena:</b><ngb-rating [(rate)]="userRate" ></ngb-rating> {{_tour.rate}}/5
+
       </p>
+      <div class="row w-100">
+        <div class="col-4">
       <b>Cena: <h3 [ngClass] = "'text-info'">{{_tour.price | currency:'PLN'}}</h3> </b>
-      <div class="float-right">
-        <button type="button" [ngClass] = "placesClass" >Ilość miejsc {{_tour.places}}/{{_tour.maxPlaces}}</button>
-        <button type="button"  [disabled]="!tourForm.valid || _tour.places<=0" [ngClass] = "reservationClass" (click)="makeReservation(tourForm.get('places').value)">Rezerwuj</button>
+        </div>
+      <div class="col-8">
         <div  class="form-group" [formGroup]="tourForm" >
-          <label class="control-label col-xs-4">Ilość miejsc</label>
-          <div class="col-xs-8">
-            <label>
+          <button type="button" [ngClass] = "placesClass" >Ilość miejsc {{_tour.places}}/{{_tour.maxPlaces}}</button>
+          <button type="button"  [disabled]="!tourForm.valid || _tour.places<=0" [ngClass] = "reservationClass" (click)="makeReservation(tourForm.get('places').value)">Rezerwuj</button>
+
+          <label class="control-label" style="margin-left: 10px">Ilość miejsc
               <input type="number" class="form-control"  name="places"   formControlName="places">
             </label>
 
@@ -43,16 +43,23 @@
             </div>
           </div>
 
-        </div>
-        <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="removeReservation();tourForm.get('places').reset(0)">Zrezygnuj</button>
+
 
       </div>
 
+      </div>
+        <div class="row w-100">
+          <div class="col-4" style="    color: dodgerblue;
+    font-size: large;">
 
-      <app-tour-date (tourDate)="choosenDate($event)"></app-tour-date>
-        <div class="float-right">
-        <button type="button"  [ngClass] = "'btn btn-danger'">Rezerwacjie{{tourForm.get('places').value }}</button>
-        <button type="button"  [ngClass] = "'btn btn-danger'">Koszt{{tourForm.get('places').value * _tour.price }}</button>
+          <b style="    color: black;">Ocena:</b><ngb-rating [(rate)]="userRate" ></ngb-rating> {{_tour.rate}}/5
+          </div>
+          <div class="col-8">
+
+          <button type="button"  [ngClass] = "'btn btn-dark'">Zarezerwowano: {{tourForm.get('places').value }}</button>
+        <button type="button"  [ngClass] = "'btn btn-dark'">Łączny koszt: {{tourForm.get('places').value * _tour.price }}</button>
+          <button type="button" [disabled]="_tour.places==_tour.maxPlaces" [ngClass] = "resignationClass" (click)="removeReservation();tourForm.get('places').reset(0)">Zrezygnuj</button>
+          </div>
         </div>
 
     </div>
