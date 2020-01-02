@@ -43,11 +43,9 @@ exports.deleteTours = (id, res)=> {
     })
 }
 
-exports.updateTour = (body,id, res)=> {
+exports.updateTour = (body,id)=> {
     console.log(body,id)
-    model.tour.updateOne({_id:id},body,(err,result)=>{
-        res.send(result)
-    })
+    return     model.tour.updateOne({_id:id},body).exec()
 
 }
 

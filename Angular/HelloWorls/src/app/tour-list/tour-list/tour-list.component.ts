@@ -4,6 +4,7 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {ReservationService} from "../../services/reservation.service";
 import {DatePipe} from "../../pipes/date.pipe";
 import {PipeFilter} from "../../model/pipes/pipe-filter";
+import {WebsocketService} from "../../services/web-socket.service";
 
 
 export class TourListComponent{
@@ -14,7 +15,7 @@ export class TourListComponent{
   page=1;
   readonly pageSize=5;
 
-  constructor(public tourService: TourService) {
+  constructor(public tourService: TourService,public socket: WebsocketService) {
     this.updateTours()
 
   }

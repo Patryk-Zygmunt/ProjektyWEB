@@ -8,11 +8,24 @@ var express = require('express');
 var service = require('./service');
 var authService = require('./auth');
 var app = express();
+var http = require('http').Server(app);
+//var io = require('socket.io')(http);
+const io = require("socket.io")(http, {
+    handlePreflightRequest: (req, res) => {
+        const headers = {
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            "Access-Control-Allow-Origin": 'http://localhost:4200', //or the specific origin you want to give access to,
+            "Access-Control-Allow-Credentials": true
+        };
+        res.writeHead(200, headers);
+        res.end();
+    }
+});
 
-app.use(cors())
+app.use(cors({credentials: true, origin: 'http://localhost:4200'}))
 
 app.use(bodyParser.json());
-app.use(authService.jwt());
+//app.use(authService.jwt());
 
 
 
@@ -60,10 +73,11 @@ app.delete('/tours', (req, res) =>{
     service.deleteTours(res);
 })
 
-app.put('/tour/:id', (req, res) =>{
-    service.updateTour(req.body,req.params.id, res);
+app.put('/tour/:id', async (req, res) =>{
+   var r = await service.updateTour(req.body,req.params.id);
+   io.send(req.body)
+   res.send(r)
 })
-
 
 app.get('/reservation/all', (req, res) =>{
     service.getReservations({},res);
@@ -99,4 +113,11 @@ app.put('/reservation/:id', (req, res) =>{
 })
 
 service.init()
-app.listen(3000);
+io.on('connection', function (socket) {
+    socket.emit('sale', { hello: 'world' });
+    io.emit('sale', { hello: 'world2' });
+    socket.on('my other event', function (data) {
+        console.log(data);
+    });
+});
+http.listen(3000);
