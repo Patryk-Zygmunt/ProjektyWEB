@@ -44,6 +44,11 @@ import {UserRegisterComponent} from "./user-register/user-register.component";
 import {UserLoginComponent} from "./user-login/user-login.component";
 import {TokenInterceptorService} from "./services/token-interceptor.service";
 import { NamePipePipe } from './pipes/name-pipe.pipe';
+import {SocketIoConfig, SocketIoModule} from "ngx-socket-io";
+
+
+const config: SocketIoConfig = { url:environment.server_url, options: {} };
+
 
 @NgModule({
   declarations: [
@@ -82,6 +87,7 @@ import { NamePipePipe } from './pipes/name-pipe.pipe';
     Ng5SliderModule,
     AngularMultiSelectModule,
     GalleryModule.forRoot(),
+    SocketIoModule.forRoot(config),
 
     AppRoutingModule
   ],

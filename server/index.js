@@ -25,7 +25,7 @@ const io = require("socket.io")(http, {
 app.use(cors({credentials: true, origin: 'http://localhost:4200'}))
 
 app.use(bodyParser.json());
-//app.use(authService.jwt());
+app.use(authService.jwt());
 
 
 
@@ -75,7 +75,7 @@ app.delete('/tours', (req, res) =>{
 
 app.put('/tour/:id', async (req, res) =>{
    var r = await service.updateTour(req.body,req.params.id);
-   io.send(req.body)
+   if(req.body.price) io.emit("sale",{...{_id:req.params.id},...req.body})
    res.send(r)
 })
 
@@ -114,10 +114,5 @@ app.put('/reservation/:id', (req, res) =>{
 
 service.init()
 io.on('connection', function (socket) {
-    socket.emit('sale', { hello: 'world' });
-    io.emit('sale', { hello: 'world2' });
-    socket.on('my other event', function (data) {
-        console.log(data);
-    });
 });
 http.listen(3000);

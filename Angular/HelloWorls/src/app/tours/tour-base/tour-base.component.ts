@@ -3,6 +3,7 @@ import {TourService} from "../../services/tour.service";
 import {NgbRatingConfig} from "@ng-bootstrap/ng-bootstrap";
 import {ReservationService} from "../../services/reservation.service";
 import {Reservation} from "../../model/reservation";
+import {WebsocketService} from "../../services/web-socket.service";
 
 
 export class TourBaseComponent {
@@ -108,6 +109,7 @@ export class TourBaseComponent {
      this._userRate = userRate ? userRate.rate : 0;
      this.isRate = !!userRate
   }
+
 
 
   public placesAmountChanged(p: number, maxPlaces: number) {

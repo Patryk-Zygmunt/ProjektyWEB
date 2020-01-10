@@ -34,7 +34,7 @@ login:String,
 })
 
 exports.tour = mongoose.model('tour', Tour)
-exports.user = mongoose.model('user', User)
+    exports.user = mongoose.model('user', User)
 exports.reservation = mongoose.model('reservation', Reservation)
 
 

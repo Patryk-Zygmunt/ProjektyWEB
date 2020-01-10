@@ -23,4 +23,14 @@ export class ClientListComponent extends TourListComponent implements OnInit {
       .subscribe(v=>this.reservation = v);
   }
 
+
+  public changePrice(t:Tour){
+    super.changePrice(t);
+    console.log("pricccc")
+
+
+  }
+
+
+
 }

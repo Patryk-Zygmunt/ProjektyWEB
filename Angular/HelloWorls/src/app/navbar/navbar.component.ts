@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {User} from "../model/user";
 import {Router} from "@angular/router";
+import {WebsocketService} from "../services/web-socket.service";
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +12,19 @@ import {Router} from "@angular/router";
 export class NavbarComponent implements OnInit {
 
   user:User;
-  constructor(private auth:AuthService,private router: Router) { }
+  show = false;
+  saleId=""
+  constructor(private auth:AuthService,private router: Router,private sale:WebsocketService) { }
 
   ngOnInit() {
     this.auth.user$.subscribe(v=>this.user=v)
+    this.sale.sale.subscribe(s=>{
+      this.saleId = s._id
+      this.show = true;
+      setTimeout(() => this.show = false, 5000);
+    })
   }
+
+
 
 }

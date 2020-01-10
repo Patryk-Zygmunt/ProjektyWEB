@@ -17,6 +17,15 @@ export class TourListComponent{
 
   constructor(public tourService: TourService,public socket: WebsocketService) {
     this.updateTours()
+    socket.sale
+      .subscribe(r=>this.changePrice(r))
+
+  }
+
+  public changePrice(t:Tour){
+    let tc = this._toursWithStyle.splice(this._toursWithStyle.findIndex(tf=>tf.tour._id===t._id))
+    this._toursWithStyle = [...tc,...this._toursWithStyle]
+
 
   }
 

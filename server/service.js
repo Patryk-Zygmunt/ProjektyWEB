@@ -99,6 +99,8 @@ exports.updateReservation = (body,id, res)=> {
     fs.readFile('./data.json', async (err, data) => {
         await model.tour.deleteMany();
         await model.reservation.deleteMany();
+        await model.user.deleteMany();
+        model.user.create({login:"admin",password:"admin",role:"ADMIN"})
         model.tour.create(JSON.parse(data), (err, result) => {
             //console.log('Init: ', result)
         })
