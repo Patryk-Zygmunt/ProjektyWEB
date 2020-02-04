@@ -25,7 +25,7 @@ const io = require("socket.io")(http, {
 app.use(cors({credentials: true, origin: 'http://localhost:4200'}))
 
 app.use(bodyParser.json());
-app.use(authService.jwt());
+//app.use(authService.jwt());
 
 
 
@@ -115,4 +115,7 @@ app.put('/reservation/:id', (req, res) =>{
 service.init()
 io.on('connection', function (socket) {
 });
-http.listen(3000);
+app.listen(3000);
+
+
+module.exports = app;
