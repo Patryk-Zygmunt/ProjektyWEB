@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 
 app.post('/auth', (req, res)=> {
     authService.authenticate(req.body)
-        .then(user => user ? res.json(user) : res.status(400).send())
+        .then(user => user ? res.json(user) : res.status(401).send())
 })
 
 app.get('/users',async (req, res)=> {

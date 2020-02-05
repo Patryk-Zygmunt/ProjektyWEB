@@ -22,7 +22,7 @@ exports.addTour = (body, res)=> {
     body.places = body.maxPlaces
     body.rate = 0
     body.rateAmount = 0
-    bodu.usersRates = []
+    body.usersRates = []
     model.tour.create(body,(err,result)=>{
         res.send(result)
     })
@@ -97,13 +97,14 @@ exports.updateReservation = (body,id, res)=> {
 
  exports.init = () => {
     fs.readFile('./data.json', async (err, data) => {
-        await model.tour.deleteMany();
-        await model.reservation.deleteMany();
-        await model.user.deleteMany();
-        model.user.create({login:"admin",password:"admin",role:"ADMIN"})
-        model.tour.create(JSON.parse(data), (err, result) => {
-            //console.log('Init: ', result)
-        })
-    })
+    //     await model.tour.deleteMany();
+        //     //     await model.reservation.deleteMany();
+        //     //     await model.user.deleteMany();
+        //     //     model.user.create({login:"admin",password:"admin",role:"ADMIN"})
+        //     //     model.tour.create(JSON.parse(data), (err, result) => {
+        //     //         //console.log('Init: ', result)
+        //     //     })
+        //     // })
+ })
  }
 

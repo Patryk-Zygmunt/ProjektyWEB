@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "chai-pdf": "^1.0.9",
     "connect": "^3.7.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -24,6 +25,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "mocha": "^7.0.1"
+    "mocha": "^7.0.1",
+    "mochawesome": "^4.1.0"
   }
 }
