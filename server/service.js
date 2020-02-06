@@ -24,7 +24,7 @@ exports.addTour = (body, res)=> {
     body.rateAmount = 0
     body.usersRates = []
     model.tour.create(body,(err,result)=>{
-        res.send(result)
+        res.status(201).send(result)
     })
 
 }
@@ -97,14 +97,14 @@ exports.updateReservation = (body,id, res)=> {
 
  exports.init = () => {
     fs.readFile('./data.json', async (err, data) => {
-    //     await model.tour.deleteMany();
+      //  await model.tour.deleteMany();
         //     //     await model.reservation.deleteMany();
         //     //     await model.user.deleteMany();
         //     //     model.user.create({login:"admin",password:"admin",role:"ADMIN"})
-        //     //     model.tour.create(JSON.parse(data), (err, result) => {
+    // model.tour.create(JSON.parse(data), (err, result) => {
         //     //         //console.log('Init: ', result)
         //     //     })
         //     // })
- })
- }
+
+ })}
 

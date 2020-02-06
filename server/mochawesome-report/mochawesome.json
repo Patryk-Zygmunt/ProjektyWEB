@@ -1,0 +1,587 @@
+{
+  "stats": {
+    "suites": 7,
+    "tests": 18,
+    "passes": 8,
+    "pending": 0,
+    "failures": 10,
+    "start": "2020-02-06T09:35:17.476Z",
+    "end": "2020-02-06T09:35:18.749Z",
+    "duration": 1273,
+    "testsRegistered": 18,
+    "passPercent": 44.44444444444444,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "4faa87af-3ed3-45d2-999d-95e0d6de2964",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "229035fc-cf8d-4a70-a4ee-72cb93f54ee4",
+          "title": "Pobranie wszystkich wycieczek",
+          "fullFile": "C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js",
+          "file": "\\test\\app.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Pobranie wszystkich wycieczek",
+              "fullTitle": "Pobranie wszystkich wycieczek Pobranie wszystkich wycieczek",
+              "timedOut": false,
+              "duration": 1067,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .get(\"/tour/all\")\n    .end((err, res) => {\n        expect(res).to.have.status(200);\n        expect(res.body).to.length(10);\n        res.body.forEach(v=>expect(v).to.have.any.keys(tourKeys))\n        done();\n    });",
+              "err": {},
+              "uuid": "bfc52190-7b80-4f55-b0a2-a37987fc2469",
+              "parentUUID": "229035fc-cf8d-4a70-a4ee-72cb93f54ee4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "bfc52190-7b80-4f55-b0a2-a37987fc2469"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1067,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "767d4d91-2f1c-48bf-bbd8-8ddaf59b79bd",
+          "title": "Pobranie wybranej wycieczki ",
+          "fullFile": "C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js",
+          "file": "\\test\\app.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "id istniejące w bazie ",
+              "fullTitle": "Pobranie wybranej wycieczki  id istniejące w bazie ",
+              "timedOut": false,
+              "duration": 12,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .get(\"/tour/5e3bdbd05787b19948f05e66\")\n    .end((err, res) => {\n        expect(res).to.have.status(200);\n        expect(res.body).to.have.any.keys(tourKeys)\n        done();\n    });",
+              "err": {},
+              "uuid": "c3944650-6413-4840-9d7e-9066cc4ea712",
+              "parentUUID": "767d4d91-2f1c-48bf-bbd8-8ddaf59b79bd",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "id nie  istniejące w bazie ",
+              "fullTitle": "Pobranie wybranej wycieczki  id nie  istniejące w bazie ",
+              "timedOut": false,
+              "duration": 4,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .get(\"/tour/not_exist\")\n    .end((err, res) => {\n        expect(res).to.have.status(200);\n        expect(res.body).to.not.have.any.keys(tourKeys)\n        done();\n    });",
+              "err": {},
+              "uuid": "a471c7e5-9d83-462d-b8b6-4f32b77eceab",
+              "parentUUID": "767d4d91-2f1c-48bf-bbd8-8ddaf59b79bd",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "c3944650-6413-4840-9d7e-9066cc4ea712",
+            "a471c7e5-9d83-462d-b8b6-4f32b77eceab"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 16,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "418a8b98-7d81-41e9-9df7-ad26790ad550",
+          "title": " Pobranie wszystkich rezerwacji użytkownika",
+          "fullFile": "C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js",
+          "file": "\\test\\app.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "id użytkownika z dodanymi rezerwacjami",
+              "fullTitle": " Pobranie wszystkich rezerwacji użytkownika id użytkownika z dodanymi rezerwacjami",
+              "timedOut": false,
+              "duration": 5,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .get(\"/reservation/user/5e3aaf42b7ce6e95f8714c22\")\n    .end((err, res) => {\n        expect(res).to.have.status(200);\n        expect(res.body).to.length.gt(0);\n        res.body.forEach(v=>expect(v).to.have.any.keys(reservationKeys));\n        done();\n    });",
+              "err": {},
+              "uuid": "ba9f4457-960c-4e0c-8bf6-57aa3b641aae",
+              "parentUUID": "418a8b98-7d81-41e9-9df7-ad26790ad550",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "id użytkownika bez rezerwacji",
+              "fullTitle": " Pobranie wszystkich rezerwacji użytkownika id użytkownika bez rezerwacji",
+              "timedOut": false,
+              "duration": 6,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .get(\"/reservation/user/5e3aad7859f2846764b121aeee\")\n    .end((err, res) => {\n        expect(res).to.have.status(200);\n        expect(res.body).to.length(0);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected [ Array(1) ] to have a length of 0 but got 1",
+                "estack": "AssertionError: expected [ Array(1) ] to have a length of 0 but got 1\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:87:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 1\n+ 0\n"
+              },
+              "uuid": "71e86f1b-ca2f-4d38-8d91-d2259f28fac9",
+              "parentUUID": "418a8b98-7d81-41e9-9df7-ad26790ad550",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ba9f4457-960c-4e0c-8bf6-57aa3b641aae"
+          ],
+          "failures": [
+            "71e86f1b-ca2f-4d38-8d91-d2259f28fac9"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 11,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "a6da5b66-08f8-4f8c-84d4-1f43b6558fed",
+          "title": "Rejestracja nowego użytkownika",
+          "fullFile": "C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js",
+          "file": "\\test\\app.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "nowy poprawny login, poprawne hasło",
+              "fullTitle": "Rejestracja nowego użytkownika nowy poprawny login, poprawne hasło",
+              "timedOut": false,
+              "duration": 34,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/signup\")\n    .send({\n        login: \"user\",\n        password: \"user\"\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(201);\n        done();\n    });",
+              "err": {},
+              "uuid": "3ec6747f-9a2b-4c93-97a0-3a5a7d5fc189",
+              "parentUUID": "a6da5b66-08f8-4f8c-84d4-1f43b6558fed",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "istniejacy login, poprawne hasło",
+              "fullTitle": "Rejestracja nowego użytkownika istniejacy login, poprawne hasło",
+              "timedOut": false,
+              "duration": 11,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/signup\")\n    .send({\n        login: \"user\",\n        password: \"user\"\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:117:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 201\n+ 400\n"
+              },
+              "uuid": "27252e77-4af1-4a79-9a77-679c1afd257a",
+              "parentUUID": "a6da5b66-08f8-4f8c-84d4-1f43b6558fed",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "nowy poprawny login, hasło krótsze niż 3 znaki",
+              "fullTitle": "Rejestracja nowego użytkownika nowy poprawny login, hasło krótsze niż 3 znaki",
+              "timedOut": false,
+              "duration": 9,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/signup\")\n    .send({\n        login: \"user1231\",\n        password: \"12\"\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:130:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 201\n+ 400\n"
+              },
+              "uuid": "4c8d5236-9e0f-4157-9b4e-bde533b023bb",
+              "parentUUID": "a6da5b66-08f8-4f8c-84d4-1f43b6558fed",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "nowy poprawny login, hasło krótsze niż 3 znaki",
+              "fullTitle": "Rejestracja nowego użytkownika nowy poprawny login, hasło krótsze niż 3 znaki",
+              "timedOut": false,
+              "duration": 10,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/signup\")\n    .send({\n        login: \"\",\n        password: \"1234\"\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:144:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 201\n+ 400\n"
+              },
+              "uuid": "703a3ac0-dbec-49b5-a6ca-ffd7806a0e78",
+              "parentUUID": "a6da5b66-08f8-4f8c-84d4-1f43b6558fed",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3ec6747f-9a2b-4c93-97a0-3a5a7d5fc189"
+          ],
+          "failures": [
+            "27252e77-4af1-4a79-9a77-679c1afd257a",
+            "4c8d5236-9e0f-4157-9b4e-bde533b023bb",
+            "703a3ac0-dbec-49b5-a6ca-ffd7806a0e78"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 64,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "3bf01dc7-c032-44ce-8a1e-2fecc9808eb7",
+          "title": "Zalogowanie użytkownika",
+          "fullFile": "C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js",
+          "file": "\\test\\app.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "stniejący login, poprawne hasło",
+              "fullTitle": "Zalogowanie użytkownika stniejący login, poprawne hasło",
+              "timedOut": false,
+              "duration": 11,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/auth\")\n    .send({\n        login: \"user\",\n        password: \"user\"\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(200);\n        expect(res.body).to.have.any.keys('token')\n        done();\n    });",
+              "err": {},
+              "uuid": "30e8ea8e-f16f-4863-967d-60a49ff463e5",
+              "parentUUID": "3bf01dc7-c032-44ce-8a1e-2fecc9808eb7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "istniejący login, niepoprawne hasło",
+              "fullTitle": "Zalogowanie użytkownika istniejący login, niepoprawne hasło",
+              "timedOut": false,
+              "duration": 9,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/auth\")\n    .send({\n        login: \"user\",\n        password: \"userrtrtrt\"\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(401);\n        expect(res.body).to.not.have.keys('token')\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 401 but got 200",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 401 but got 200\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:178:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 200\n+ 401\n"
+              },
+              "uuid": "d9160ea9-a088-46bf-95f8-ddf4473456fd",
+              "parentUUID": "3bf01dc7-c032-44ce-8a1e-2fecc9808eb7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "pusty login, puste hasło",
+              "fullTitle": "Zalogowanie użytkownika pusty login, puste hasło",
+              "timedOut": false,
+              "duration": 9,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/auth\")\n    .send({\n        login: \"\",\n        password: \"\"\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 200",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 200\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:193:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 200\n+ 400\n"
+              },
+              "uuid": "6fabd11c-7b2c-489c-a0a1-1712f276e368",
+              "parentUUID": "3bf01dc7-c032-44ce-8a1e-2fecc9808eb7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "30e8ea8e-f16f-4863-967d-60a49ff463e5"
+          ],
+          "failures": [
+            "d9160ea9-a088-46bf-95f8-ddf4473456fd",
+            "6fabd11c-7b2c-489c-a0a1-1712f276e368"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 29,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "0ae7535d-10bf-47d1-888e-04376a3130c9",
+          "title": "Dodanie nowej wycieczk",
+          "fullFile": "C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js",
+          "file": "\\test\\app.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Poprawne dane wycieczki ze wszystkimi poprawnymi danymi",
+              "fullTitle": "Dodanie nowej wycieczk Poprawne dane wycieczki ze wszystkimi poprawnymi danymi",
+              "timedOut": false,
+              "duration": 13,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/tour\")\n    .send({\n        imageUrl: [\n            \"https://i.content4travel.com/cms/img/u/desktop/prodsliderphoto/xsomale_0.jpg?version=89?version=1\"\n        ],\n        name: \"Wycieczka 0\",\n        country: \"Angola\",\n        description: \"Cras sit amet nibh libero, in gravida nulla\",\n        price: 5912,\n        maxPlaces: 53,\n        start: \"2020-01-28T00:00:00.000Z\",\n        end: \"2020-03-15T00:00:00.000Z\",\n        places: 53\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(201);\n        done();\n    });",
+              "err": {},
+              "uuid": "365a9b0c-dfee-4b33-989b-c511832c6fd6",
+              "parentUUID": "0ae7535d-10bf-47d1-888e-04376a3130c9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Niepoprawne dane w polu ceny wpisano niepoprawną ujemną liczbę ",
+              "fullTitle": "Dodanie nowej wycieczk Niepoprawne dane w polu ceny wpisano niepoprawną ujemną liczbę ",
+              "timedOut": false,
+              "duration": 11,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/tour\")\n    .send({\n        imageUrl: [\n            \"https://i.content4travel.com/cms/img/u/desktop/prodsliderphoto/xsomale_0.jpg?version=89?version=1\"\n        ],\n        name: \"Wycieczka 0\",\n        country: \"Angola\",\n        description: \"Cras sit amet nibh libero, in gravida nulla\",\n        price: - 5912,\n        maxPlaces: 53,\n        start: \"2020-01-28T00:00:00.000Z\",\n        end: \"2020-03-15T00:00:00.000Z\",\n        places: 53\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:242:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 201\n+ 400\n"
+              },
+              "uuid": "75fad0bf-f564-4c8e-af48-0453ad8dfdbf",
+              "parentUUID": "0ae7535d-10bf-47d1-888e-04376a3130c9",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Puste ciało zapytania",
+              "fullTitle": "Dodanie nowej wycieczk Puste ciało zapytania",
+              "timedOut": false,
+              "duration": 7,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .post(\"/tour\")\n    .send({\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 201\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:254:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 201\n+ 400\n"
+              },
+              "uuid": "8eca86ce-1cf3-4001-9cef-ff09b3442a93",
+              "parentUUID": "0ae7535d-10bf-47d1-888e-04376a3130c9",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "365a9b0c-dfee-4b33-989b-c511832c6fd6"
+          ],
+          "failures": [
+            "75fad0bf-f564-4c8e-af48-0453ad8dfdbf",
+            "8eca86ce-1cf3-4001-9cef-ff09b3442a93"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 31,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "493be414-8ed0-4706-b521-755d4fdbd5f7",
+          "title": "Edycja wycieczki",
+          "fullFile": "C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js",
+          "file": "\\test\\app.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Poprawna wartość liczbowa  inna niż poprzednia dla tej wycieczki w polu ceny",
+              "fullTitle": "Edycja wycieczki Poprawna wartość liczbowa  inna niż poprzednia dla tej wycieczki w polu ceny",
+              "timedOut": false,
+              "duration": 8,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .put(\"/tour/5e3aaef1b7ce6e95f8714c21\")\n    .send({\n        price: 5912,\n        maxPlaces: 53\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(200);\n        done();\n    });",
+              "err": {},
+              "uuid": "3310daec-ab06-4afe-b9cd-3092794a32ea",
+              "parentUUID": "493be414-8ed0-4706-b521-755d4fdbd5f7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Niepoprawne dane w polu ceny wpisano niepoprawną ujemną liczbę ",
+              "fullTitle": "Edycja wycieczki Niepoprawne dane w polu ceny wpisano niepoprawną ujemną liczbę ",
+              "timedOut": false,
+              "duration": 10,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .put(\"/tour/5e3aaef1b7ce6e95f8714c21\")\n    .send({\n        imageUrl: [\n            \"https://i.content4travel.com/cms/img/u/desktop/prodsliderphoto/xsomale_0.jpg?version=89?version=1\"\n        ],\n        name: \"Wycieczka 0\",\n        country: \"Angola\",\n        description: \"Cras sit amet nibh libero, in gravida nulla\",\n        price: - 5912,\n        maxPlaces: 53,\n        start: \"2020-01-28T00:00:00.000Z\",\n        end: \"2020-03-15T00:00:00.000Z\",\n        places: 53\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 200",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 200\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:295:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 200\n+ 400\n"
+              },
+              "uuid": "54f03a5a-d5b2-42f8-a605-6aee3420fb01",
+              "parentUUID": "493be414-8ed0-4706-b521-755d4fdbd5f7",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Puste ciało zapytania",
+              "fullTitle": "Edycja wycieczki Puste ciało zapytania",
+              "timedOut": false,
+              "duration": 7,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "chai\n    .request(app)\n    .put(\"/tour/5e3aaef1b7ce6e95f8714c21\")\n    .send({\n    })\n    .end((err, res) => {\n        expect(res).to.have.status(400);\n        done();\n    });",
+              "err": {
+                "message": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 200",
+                "estack": "AssertionError: expected { Object (_events, _eventsCount, ...) } to have status code 400 but got 200\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\test\\app.test.js:307:37\n    at Test.Request.callback (node_modules\\superagent\\lib\\node\\index.js:716:12)\n    at C:\\Users\\ComarchDev\\IdeaProjects\\ProjektyWEB\\server\\node_modules\\superagent\\lib\\node\\index.js:916:18\n    at IncomingMessage.<anonymous> (node_modules\\superagent\\lib\\node\\parsers\\json.js:19:7)\n    at endReadableNT (_stream_readable.js:1154:12)\n    at processTicksAndRejections (internal/process/task_queues.js:77:11)",
+                "diff": "- 200\n+ 400\n"
+              },
+              "uuid": "a19a28f9-04af-477d-aa9b-e1068a9df032",
+              "parentUUID": "493be414-8ed0-4706-b521-755d4fdbd5f7",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "3310daec-ab06-4afe-b9cd-3092794a32ea"
+          ],
+          "failures": [
+            "54f03a5a-d5b2-42f8-a605-6aee3420fb01",
+            "a19a28f9-04af-477d-aa9b-e1068a9df032"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 25,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false
+      },
+      "version": "4.1.0"
+    },
+    "marge": {
+      "options": null,
+      "version": "4.1.0"
+    }
+  }
+}

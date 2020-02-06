@@ -41,7 +41,7 @@ app.get('/users',async (req, res)=> {
 
 app.post('/signup', (req, res)=> {
     authService.signup(req.body)
-        .then(user => res.json(user))
+        .then(user => res.status(201).json(user))
 })
 
 

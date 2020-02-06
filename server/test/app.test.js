@@ -41,7 +41,7 @@ describe("Pobranie wybranej wycieczki ", () => {
     it("id istniejące w bazie ", done => {
         chai
             .request(app)
-            .get("/tour/5e3aa8b8e851660e380cf9d4")
+            .get("/tour/5e3bdbd05787b19948f05e66")
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.have.any.keys(tourKeys)
@@ -57,7 +57,7 @@ describe("Pobranie wybranej wycieczki ", () => {
             .get("/tour/not_exist")
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                chai.should().not.exist(res.body)
+                expect(res.body).to.not.have.any.keys(tourKeys)
                 done();
             });
     });
@@ -69,7 +69,7 @@ describe(" Pobranie wszystkich rezerwacji użytkownika", () => {
     it("id użytkownika z dodanymi rezerwacjami", done => {
         chai
             .request(app)
-            .get("/reservation/user/5e3aad6b59f2846764b121a6")
+            .get("/reservation/user/5e3aaf42b7ce6e95f8714c22")
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body).to.length.gt(0);
@@ -269,7 +269,7 @@ describe("Edycja wycieczki", () => {
                 maxPlaces: 53
             })
             .end((err, res) => {
-                expect(res).to.have.status(201);
+                expect(res).to.have.status(200);
                 done();
             });
     });

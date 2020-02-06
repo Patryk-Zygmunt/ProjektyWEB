@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "report": "mocha --reporter mochawesome"
   },
   "author": "",
   "license": "ISC",
